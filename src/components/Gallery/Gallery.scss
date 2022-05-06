@@ -1,0 +1,9 @@
+@import "../../assets/styles/scss/abstracts/variables.scss";
+
+.pieces-gallery {
+	background-color: $lighter;
+	justify-items: center;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-gap: $bfs;
+}

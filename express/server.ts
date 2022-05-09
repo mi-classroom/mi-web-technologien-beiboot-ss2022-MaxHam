@@ -6,7 +6,7 @@ const app = express();
 app.use(
 	basicAuth({
 		challenge: true,
-		users: { cranach: "meisterwer" },
+		users: { cranach: "meisterwerk" },
 	})
 );
 app.use(express.static(path.join(__dirname, "..", "build")));
@@ -19,6 +19,6 @@ app.use((req, res, next) => {
 });
 
 // start express server on port 5000
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
 	console.log("server started on port 5000");
 });

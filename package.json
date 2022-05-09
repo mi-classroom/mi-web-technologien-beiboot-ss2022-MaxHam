@@ -30,7 +30,7 @@
 	},
 	"scripts": {
 		"start-client": "react-scripts start",
-		"start": "PORT=5000 npm run build && (cd express && npm start)",
+		"start": "npm run build && (cd express && npm start)",
 		"build": "react-scripts build",
 		"heroku-postbuild": "cd express && npm install",
 		"test": "react-scripts test",

@@ -6,7 +6,7 @@ const app = express();
 app.use(
 	basicAuth({
 		challenge: true,
-		users: { cranach: "meisterwerk" },
+		users: { cranach: "meisterwerke" },
 	})
 );
 app.use(express.static(path.join(__dirname, "..", "build")));

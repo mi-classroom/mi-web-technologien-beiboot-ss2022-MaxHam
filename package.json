@@ -1,7 +1,8 @@
 {
 	"name": "mi-web-technologien-beiboot-ss2022-maxham",
-	"homepage": "https://mi-classroom.github.io/mi-web-technologien-beiboot-ss2022-MaxHam/",
+	"homepage": "./",
 	"version": "0.1.0",
+	"proxy": "http://localhost:5000",
 	"private": true,
 	"browser": {
 		"fs": false,
@@ -16,7 +17,10 @@
 		"@types/node": "^16.11.33",
 		"@types/react": "^18.0.8",
 		"@types/react-dom": "^18.0.3",
+		"express-basic-auth": "^1.2.1",
 		"fs": "^0.0.1-security",
+		"http-auth": "^4.1.9",
+		"nodemon": "^2.0.16",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"react-scripts": "5.0.1",
@@ -25,12 +29,11 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start": "react-scripts start",
+		"start-client": "react-scripts start",
+		"start": "npm run build && (cd express && npm start)",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [

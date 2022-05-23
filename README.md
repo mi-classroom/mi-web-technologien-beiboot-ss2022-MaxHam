@@ -7,6 +7,6 @@ Als organisatorischen Rahmen für das Projekt nutzen wir GitHub Classroom. Inhal
 # Docker
 
 1. Start Docker
-2. Run `docker image build -t mi-web-technologien-beiboot-ss2022-maxham .` inside the project folder to create the image
+2. Run `docker image build -t mi-web-technologien-beiboot-ss2022-maxham .` inside the project folder to create the image (~300 seconds)
 3. Run `docker run -p 3000:3000 mi-web-technologien-beiboot-ss2022-maxham` to start a container
 4. Access the website at `localhost:3000`

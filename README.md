@@ -10,3 +10,19 @@ Als organisatorischen Rahmen für das Projekt nutzen wir GitHub Classroom. Inhal
 2. Run `docker image build -t mi-web-technologien-beiboot-ss2022-maxham .` inside the project folder to create the image (~300 seconds)
 3. Run `docker run -p 3000:3000 mi-web-technologien-beiboot-ss2022-maxham` to start a container
 4. Access the website at `localhost:3000`
+
+# Autor
+
+Maximilian Hammer
+
+# Aufgabe 1
+
+Branch `Basisfunktionen-#1`
+
+# Aufgabe 2
+
+Branch `ReviewProcess-#2`
+
+# Heroku Link
+
+https://limitless-beach-53863.herokuapp.com/

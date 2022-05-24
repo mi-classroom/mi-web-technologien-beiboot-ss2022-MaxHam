@@ -10,9 +10,9 @@ Das Projekt muss über eine externe URL erreichbar sein. Es gibt mehrere Möglic
 
 ## Decision
 
-Github Pages wird als Hosting Dienst genutzt.
+Heroku wird als Hosting Dienst genutzt.
 
 ## Consequences
 
-Github bietet eine integrierte Option ein Repository zu veröffentlichen. Durch die Wahl von Github Pages als Hosting Service wird der Tech Stack kleiner gehalten. Ebenfalls ist der Aufwand für Einrichtung sowie Wartung sehr klein.
-Github Pages kann nur statische Websites hosten und ist daher stark eingeschränkt in der Umsetzung von komplexerer Logik.
+Da das Projekt einen Passwort Schutz benötigt sind statische Hosting Services schwer zu nutzen, da über diese kein Schutz gewährleister werden kann. Heroku bietet die Möglichkeit einen Web Server zu publizieren und ist daher geeignet für die Einstellung von einer Schutzebene.
+Ebenfalls ist Heroku sehr leicht im Umgang und ermöglicht schnelle Bereitstellungen.

@@ -2,7 +2,7 @@
 	"name": "mi-web-technologien-beiboot-ss2022-maxham",
 	"homepage": "./",
 	"version": "0.1.0",
-	"proxy": "http://localhost:5000",
+	"proxy": "http://localhost:3000",
 	"private": true,
 	"browser": {
 		"fs": false,
@@ -10,27 +10,22 @@
 		"os": false
 	},
 	"dependencies": {
-		"@testing-library/jest-dom": "^5.16.4",
-		"@testing-library/react": "^13.2.0",
-		"@testing-library/user-event": "^13.5.0",
 		"@types/jest": "^27.5.0",
 		"@types/node": "^16.11.33",
 		"@types/react": "^18.0.8",
 		"@types/react-dom": "^18.0.3",
 		"express-basic-auth": "^1.2.1",
 		"fs": "^0.0.1-security",
-		"http-auth": "^4.1.9",
-		"nodemon": "^2.0.16",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"react-scripts": "5.0.1",
 		"sass": "^1.51.0",
+		"svgo": "^2.8.0",
 		"typescript": "^4.6.4",
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start-client": "react-scripts start",
-		"start": "npm run build && (cd express && npm start)",
+		"start": "cd express && node server.ts",
 		"build": "react-scripts build",
 		"heroku-postbuild": "cd express && npm install",
 		"test": "react-scripts test",
@@ -53,8 +48,5 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	},
-	"devDependencies": {
-		"gh-pages": "^3.2.3"
 	}
 }

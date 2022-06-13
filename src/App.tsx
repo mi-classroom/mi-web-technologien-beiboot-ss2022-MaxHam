@@ -23,9 +23,9 @@ function App() {
 			);
 			// sort filtered pieces by sortingNumber
 			const filteredItemsSorted: any[] = filteredItems.sort((a: any, b: any) =>
-				a.sortingNumber > b.sortingNumber
+				a.sortingInfo.year > b.sortingInfo.year
 					? 1
-					: b.sortingNumber > a.sortingNumber
+					: b.sortingInfo.year > a.sortingInfo.year
 					? -1
 					: 0
 			);
@@ -40,6 +40,14 @@ function App() {
 						date: item.metadata.date,
 						medium: removeTextInBrackets(item.medium),
 						owner: item.owner,
+						width: item.images.overall.images[0].sizes.medium
+							? item.images.overall.images[0].sizes.medium.dimensions.width
+							: 1,
+						height: item.images.overall.images[0].sizes.medium
+							? item.images.overall.images[0].sizes.medium.dimensions.height
+							: 1,
+						year: item.sortingInfo.year,
+						artist: item.involvedPersons[0].name,
 					};
 				}
 			);

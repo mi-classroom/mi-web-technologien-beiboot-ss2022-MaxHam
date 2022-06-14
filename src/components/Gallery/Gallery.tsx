@@ -15,6 +15,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
   const [hoveredPiece, setHoveredPiece] = useState<IPiece>();
 
   const [zCoord, setZCoord] = useState(1);
+  const [xCoord, setXCoord] = useState(0);
 
   const handleHover = (piece: IPiece | undefined) => (e: any) => {
     setHoveredPiece(piece);
@@ -28,8 +29,17 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
     setZCoord(zCoord + 1);
   };
 
+  const goLeft = () => {
+    setXCoord(xCoord - 1);
+  };
+
+  const goRight = () => {
+    setXCoord(xCoord + 1);
+  };
+
   const reset = () => {
     setZCoord(1);
+    setXCoord(0);
   };
   return (
     <>
@@ -37,6 +47,8 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
         <button onClick={increaseYear}>Go to next Year</button>
         <button onClick={decreaseYear}>Go to last Year</button>
         <button onClick={reset}>Go to beginning</button>
+        <button onClick={goRight}>Go to right</button>
+        <button onClick={goLeft}>Go to left</button>
         {hoveredPiece && (
           <>
             <div className='h1'>{hoveredPiece.title} </div>
@@ -94,7 +106,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
         <ambientLight intensity={0.3} />
 
         <pointLight intensity={0.8} position={[5, 0, 5]} />
-        <CameraControls zCoord={zCoord} />
+        <CameraControls zCoord={zCoord} xCoord={xCoord} />
       </Canvas>
     </>
   );

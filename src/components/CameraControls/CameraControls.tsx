@@ -5,8 +5,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 // Extend will make OrbitControls available as a JSX element called orbitControls for us to use.
 extend({ OrbitControls });
 
-const CameraControls = (props) => {
-  const { zCoord } = props;
+interface ICameraControls {
+  xCoord: number;
+  zCoord: number;
+}
+
+const CameraControls: React.FC<ICameraControls> = (props: ICameraControls) => {
+  const { zCoord, xCoord } = props;
   // Get a reference to the Three.js Camera, and the canvas html element.
   // We need these to setup the OrbitControls component.
   // https://threejs.org/docs/#examples/en/controls/OrbitControls
@@ -21,10 +26,9 @@ const CameraControls = (props) => {
 
   useFrame((state) => {
     // @ts-ignore
-    controls?.current?.target?.set(0, 0, zCoord);
+    controls?.current?.target?.set(xCoord, 0, zCoord);
     // @ts-ignore
-    controls?.current?.object?.position?.set(0, 0, zCoord);
-    // @ts-ignore
+    controls?.current?.object?.position?.set(xCoord, 0, zCoord);
     // @ts-ignore
     controls?.current?.update();
   });
@@ -35,7 +39,7 @@ const CameraControls = (props) => {
       ref={controls}
       domElement={domElement}
       args={[camera, domElement]}
-      enableZoom={true}
+      enableRotate={true}
       rotateSpeed={0.1}
     />
   );

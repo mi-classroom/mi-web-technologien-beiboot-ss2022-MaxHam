@@ -28,7 +28,7 @@ const CameraControls: React.FC<ICameraControls> = (props: ICameraControls) => {
     // @ts-ignore
     controls?.current?.target?.set(xCoord, 0, zCoord);
     // @ts-ignore
-    controls?.current?.object?.position?.set(xCoord, 0, zCoord);
+    controls?.current?.object?.position?.set(xCoord, 0.2, zCoord + 0.5);
     // @ts-ignore
     controls?.current?.update();
   });

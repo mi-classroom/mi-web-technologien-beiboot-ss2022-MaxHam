@@ -1,15 +1,17 @@
-import { Line, Text3D } from '@react-three/drei';
+import { Text3D } from '@react-three/drei';
 import { extend } from '@react-three/fiber';
-import React from 'react';
 import * as THREE from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import Line from '../Line/Line';
+import IBMPlexSans from '../../assets/IBM Plex Sans_Regular.json';
 
 const Text = (props: any) => {
   const { x, y, z, content } = props;
   extend({ TextGeometry });
   return (
     <mesh position={[x, y, z]}>
-      <Text3D size={0.05} height={0.005} font={''}>
+      {/* @ts-ignore */}
+      <Text3D size={0.05} height={0.005} font={IBMPlexSans}>
         {content}
         <meshBasicMaterial color='#ffffff' />
       </Text3D>
@@ -19,27 +21,33 @@ const Text = (props: any) => {
 const Timeline = (props: any) => {
   const { startDate, endDate, stepSize } = props;
   const length = (endDate - startDate) * stepSize;
-  const height = 0.95;
+  const height = 5;
+  const width = 5;
 
   const array = Array.from(Array(length).keys());
   return (
     <group position={[0, 0, 0]}>
-      <Line
-        points={[
-          new THREE.Vector3(-1, 0, 0),
-          new THREE.Vector3(-1, 0, -length),
-        ]}
-        linewidth={0.5}
-        color='red'
-      />
-      {/* {array.map((number, index) => (
-        <Text
-          x={-1.25}
-          y={height - 0.025}
-          z={-(index * stepSize)}
-          content={parseInt(startDate) + index}
-        />
-      ))} */}
+      <Line start={[-0.5, -0.5, -0.2]} end={[-0.5, -0.5, -length]} />
+      {array.map((number, index) => (
+        <group>
+          <Line
+            start={[-0.5, height, -(number * stepSize + 0.2)]}
+            end={[-0.5, -0.5, -(number * stepSize + 0.2)]}
+            linewidth={0.5}
+          />
+          <Line
+            start={[width, -0.5, -(number * stepSize + 0.2)]}
+            end={[-0.5, -0.5, -(number * stepSize + 0.2)]}
+            linewidth={0.5}
+          />
+          <Text
+            x={-0.75}
+            y={0}
+            z={-(number * stepSize + 0.2)}
+            content={startDate + number}
+          />
+        </group>
+      ))}
     </group>
   );
 };

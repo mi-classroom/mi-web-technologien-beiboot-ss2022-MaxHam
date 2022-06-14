@@ -65,7 +65,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
         )}
       </div>
 
-      <Canvas camera={{ position: [0, 0, 1], far: -1000 }}>
+      <Canvas camera={{ position: [0, -1, 1], far: -1000 }}>
         <Physics>
           <>
             <PhyPlane
@@ -96,11 +96,13 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
               ));
             })}
 
-            {/* <Timeline
-              startDate={pieces[0].year || 0}
-              endDate={pieces[pieces.length - 1].year || 100}
-              stepSize={1}
-            /> */}
+            {pieces && (
+              <Timeline
+                startDate={pieces[0].year}
+                endDate={pieces[pieces.length - 1].year}
+                stepSize={1}
+              />
+            )}
           </>
         </Physics>
         <ambientLight intensity={0.3} />

@@ -6,6 +6,7 @@ import { calculatePieceScale, groupByYear } from '../../utils';
 import CameraControls from '../CameraControls/CameraControls';
 import PhyPlane from '../PhyPlane/PhyPlane';
 import Piece from '../Piece';
+import Timeline from '../Timeline/Timeline';
 import './Gallery.scss';
 
 const Gallery: React.FC<IGallery> = (props: IGallery) => {
@@ -13,14 +14,29 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
 
   const [hoveredPiece, setHoveredPiece] = useState<IPiece>();
 
+  const [zCoord, setZCoord] = useState(1);
+
   const handleHover = (piece: IPiece | undefined) => (e: any) => {
-    console.log(e);
     setHoveredPiece(piece);
   };
 
+  const increaseYear = () => {
+    setZCoord(zCoord - 1);
+  };
+
+  const decreaseYear = () => {
+    setZCoord(zCoord + 1);
+  };
+
+  const reset = () => {
+    setZCoord(1);
+  };
   return (
     <>
       <div className='overlay'>
+        <button onClick={increaseYear}>Go to next Year</button>
+        <button onClick={decreaseYear}>Go to last Year</button>
+        <button onClick={reset}>Go to beginning</button>
         {hoveredPiece && (
           <>
             <div className='h1'>{hoveredPiece.title} </div>
@@ -37,12 +53,12 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
         )}
       </div>
 
-      <Canvas camera={{ position: [0, 0, 10], near: 0.1, far: 1000 }}>
+      <Canvas camera={{ position: [0, 0, 1], far: -1000 }}>
         <Physics>
           <>
             <PhyPlane
               color='green'
-              position={[0, -100, 0]}
+              position={[0, -1, 0]}
               rotation={[-Math.PI / 2, 0, 0]}
             />
 
@@ -78,7 +94,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
         <ambientLight intensity={0.3} />
 
         <pointLight intensity={0.8} position={[5, 0, 5]} />
-        <CameraControls />
+        <CameraControls zCoord={zCoord} />
       </Canvas>
     </>
   );

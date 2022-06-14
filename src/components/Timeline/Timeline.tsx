@@ -14,7 +14,7 @@ const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
     <group position={[0, 0, 0]}>
       <Line start={[-0.5, -0.5, -0.2]} end={[-0.5, -0.5, -length]} />
       {array.map((number, index) => (
-        <group>
+        <group key={index}>
           <Line
             start={[-0.5, height, -(number * STEP_SIZE + 0.2)]}
             end={[-0.5, -0.5, -(number * STEP_SIZE + 0.2)]}

@@ -4,7 +4,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import IBMPlexSans from '../../assets/IBM Plex Sans_Regular.json';
 import { IText } from '../../types';
 
-const Text: React.FC<ILine> = (props: IText) => {
+const Text: React.FC<IText> = (props: IText) => {
   const { x, y, z, content, size = 0.05, color = '#ffffff' } = props;
   extend({ TextGeometry });
   return (

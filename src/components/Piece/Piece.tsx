@@ -13,7 +13,7 @@ const Piece: React.FC<IPiece> = (props: IPiece) => {
     width,
     height,
     indentation = 1,
-    year = 1,
+    year,
     scale,
     title,
     owner,
@@ -26,13 +26,14 @@ const Piece: React.FC<IPiece> = (props: IPiece) => {
   const z = -(year - 1501) * STEP_SIZE;
 
   return (
-    <mesh ref={mesh} position={[indentation, 0, z]}>
-      <Image
-        url={getImage(img)}
-        position={[indentation, 0, z]}
-        // @ts-ignore
-        scale={[(width / 1000) * scale, (height / 1000) * scale, 0]}
-      />
+    <>
+      <mesh ref={mesh} position={[indentation, 0, z]}>
+        <Image
+          url={getImage(img)}
+          // @ts-ignore
+          scale={[(width / 1000) * scale, (height / 1000) * scale, 0]}
+        />
+      </mesh>
       <Text
         x={indentation - 0.2}
         y={-0.3}
@@ -65,7 +66,7 @@ const Piece: React.FC<IPiece> = (props: IPiece) => {
         color='red'
         size={0.02}
       />
-    </mesh>
+    </>
   );
 };
 

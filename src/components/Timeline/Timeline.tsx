@@ -12,22 +12,22 @@ const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
   const array = Array.from(Array(length).keys());
   return (
     <group position={[0, 0, 0]}>
-      <Line start={[-0.5, -0.5, -0.2]} end={[-0.5, -0.5, -length]} />
+      <Line start={[-0.5, -0.5, 0]} end={[-0.5, -0.5, -length]} />
       {array.map((number, index) => (
         <group key={index}>
           <Line
-            start={[-0.5, height, -(number * STEP_SIZE + 0.2)]}
-            end={[-0.5, -0.5, -(number * STEP_SIZE + 0.2)]}
+            start={[-0.5, height, -(index * STEP_SIZE)]}
+            end={[-0.5, -0.5, -(index * STEP_SIZE)]}
           />
           <Line
-            start={[width, -0.5, -(number * STEP_SIZE + 0.2)]}
-            end={[-0.5, -0.5, -(number * STEP_SIZE + 0.2)]}
+            start={[width, -0.5, -(index * STEP_SIZE)]}
+            end={[-0.5, -0.5, -(index * STEP_SIZE)]}
           />
           <Text
             x={-0.75}
             y={0}
-            z={-(number * STEP_SIZE + 0.2)}
-            content={(startDate + number).toString()}
+            z={-(index * STEP_SIZE)}
+            content={(startDate + index).toString()}
           />
         </group>
       ))}

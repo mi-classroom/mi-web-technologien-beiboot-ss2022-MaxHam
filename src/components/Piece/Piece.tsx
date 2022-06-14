@@ -35,6 +35,14 @@ const Piece: React.FC<IPiece> = (props: IPiece) => {
       />
       <Text
         x={indentation - 0.2}
+        y={-0.3}
+        z={z}
+        content={title}
+        color='red'
+        size={0.02}
+      />
+      <Text
+        x={indentation - 0.2}
         y={-0.35}
         z={z}
         content={artist}

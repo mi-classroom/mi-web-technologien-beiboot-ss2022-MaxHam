@@ -6,7 +6,7 @@ const Timeline = (props: any) => {
   const { startDate, endDate } = props;
   const length = (endDate - startDate) * STEP_SIZE;
   const height = 5;
-  const width = 5;
+  const width = 50;
 
   const array = Array.from(Array(length).keys());
   return (

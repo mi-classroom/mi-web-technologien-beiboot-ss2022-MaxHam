@@ -15,7 +15,7 @@ const getImage = (text: string) => {
 
 const groupByYear = (items: IPiece[]) => {
   const groups: IPiece[][] = [];
-  items.forEach((item: any) => {
+  items.forEach((item: IPiece) => {
     const group = groups[item.year] || [];
     group.push(item);
     groups[item.year] = group;

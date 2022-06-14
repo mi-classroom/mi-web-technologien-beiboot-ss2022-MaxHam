@@ -1,5 +1,4 @@
 import { PlaneProps } from '@react-three/cannon';
-import { ThreeEvent } from '@react-three/fiber';
 
 interface IPiece extends PlaneProps {
   title: string;
@@ -20,8 +19,26 @@ interface IPiece extends PlaneProps {
   scale?: number;
 }
 
+interface ILine {
+  start: [x: number, y: number, z: number];
+  end: [x: number, y: number, z: number];
+}
+
+interface ITimeLine {
+  startDate: number;
+  endDate: number;
+}
+
+interface IText {
+  x: number;
+  y: number;
+  z: number;
+  content: string;
+  size?: number;
+  color?: string;
+}
 interface IGallery {
   pieces: IPiece[];
 }
 
-export type { IPiece, IGallery };
+export type { IPiece, IGallery, ILine, IText, ITimeLine };

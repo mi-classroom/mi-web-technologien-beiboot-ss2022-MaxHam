@@ -1,6 +1,7 @@
 import { Box } from '@react-three/drei';
+import { ILine } from '../../types';
 
-function CustomLine(props: any) {
+const CustomLine: React.FC<ILine> = (props: ILine) => {
   const { start, end } = props;
   const linewidth = 0.0075;
   const color = '#000000';
@@ -76,6 +77,6 @@ function CustomLine(props: any) {
       <meshBasicMaterial color={color} />
     </Box>
   );
-}
+};
 
 export default CustomLine;

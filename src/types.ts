@@ -1,4 +1,5 @@
 import { PlaneProps } from '@react-three/cannon';
+import { ThreeEvent } from '@react-three/fiber';
 
 interface IPiece extends PlaneProps {
   title: string;
@@ -15,8 +16,7 @@ interface IPiece extends PlaneProps {
 
   // component props
   indentation?: number;
-  depth?: number;
-  handleHover?: any;
+
   scale?: number;
 }
 

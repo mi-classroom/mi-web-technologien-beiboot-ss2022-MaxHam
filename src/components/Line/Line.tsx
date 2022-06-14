@@ -1,5 +1,4 @@
 import { Box } from '@react-three/drei';
-import { Vector3 } from '@react-three/fiber';
 
 function CustomLine(props: any) {
   const { start, end } = props;
@@ -71,11 +70,6 @@ function CustomLine(props: any) {
 
   const dimensions = calcDimensions();
   const { size, position } = dimensions;
-
-  //   const adjustedPosition: Vector3 =
-  //     position[1] === 0
-  //       ? [position[0], position[1] + linewidth / 1.9, position[2]]
-  //       : position;
 
   return (
     <Box position={position} args={size}>

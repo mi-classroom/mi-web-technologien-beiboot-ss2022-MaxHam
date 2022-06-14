@@ -12,14 +12,8 @@ import './Gallery.scss';
 const Gallery: React.FC<IGallery> = (props: IGallery) => {
   const { pieces } = props;
 
-  const [hoveredPiece, setHoveredPiece] = useState<IPiece>();
-
-  const [zCoord, setZCoord] = useState(1);
+  const [zCoord, setZCoord] = useState(0);
   const [xCoord, setXCoord] = useState(0);
-
-  const handleHover = (piece: IPiece | undefined) => (e: any) => {
-    setHoveredPiece(piece);
-  };
 
   const increaseYear = () => {
     setZCoord(zCoord - 1);
@@ -46,26 +40,13 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
       <div className='overlay'>
         <button onClick={increaseYear}>Go to next Year</button>
         <button onClick={decreaseYear}>Go to last Year</button>
-        <button onClick={reset}>Go to beginning</button>
-        <button onClick={goRight}>Go to right</button>
         <button onClick={goLeft}>Go to left</button>
-        {hoveredPiece && (
-          <>
-            <div className='h1'>{hoveredPiece.title} </div>
-            <div className='h2'>
-              {hoveredPiece.artist}
-              <br />
-              {hoveredPiece.medium}
-              <br />
-              {hoveredPiece.owner}
-              <br />
-              {hoveredPiece.year}
-            </div>
-          </>
-        )}
+        <button onClick={goRight}>Go to right</button>
+
+        <button onClick={reset}>Go to beginning</button>
       </div>
 
-      <Canvas camera={{ position: [0, -1, 1], far: -1000 }}>
+      <Canvas camera={{ position: [0, 0.5, 0] }}>
         <Physics>
           <>
             <PhyPlane
@@ -89,7 +70,6 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
                   width={item.width}
                   height={item.height}
                   artist={item.artist}
-                  handleHover={handleHover}
                   dimensions={item.dimensions}
                   scale={calculatePieceScale(item)}
                 />
@@ -100,7 +80,6 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
               <Timeline
                 startDate={pieces[0].year}
                 endDate={pieces[pieces.length - 1].year}
-                stepSize={1}
               />
             )}
           </>

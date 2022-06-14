@@ -1,26 +1,10 @@
-import { Text3D } from '@react-three/drei';
-import { extend } from '@react-three/fiber';
-import * as THREE from 'three';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { STEP_SIZE } from '../../constants';
 import Line from '../Line/Line';
-import IBMPlexSans from '../../assets/IBM Plex Sans_Regular.json';
+import Text from '../Text/Text';
 
-const Text = (props: any) => {
-  const { x, y, z, content } = props;
-  extend({ TextGeometry });
-  return (
-    <mesh position={[x, y, z]}>
-      {/* @ts-ignore */}
-      <Text3D size={0.05} height={0.005} font={IBMPlexSans}>
-        {content}
-        <meshBasicMaterial color='#ffffff' />
-      </Text3D>
-    </mesh>
-  );
-};
 const Timeline = (props: any) => {
-  const { startDate, endDate, stepSize } = props;
-  const length = (endDate - startDate) * stepSize;
+  const { startDate, endDate } = props;
+  const length = (endDate - startDate) * STEP_SIZE;
   const height = 5;
   const width = 5;
 
@@ -31,19 +15,19 @@ const Timeline = (props: any) => {
       {array.map((number, index) => (
         <group>
           <Line
-            start={[-0.5, height, -(number * stepSize + 0.2)]}
-            end={[-0.5, -0.5, -(number * stepSize + 0.2)]}
+            start={[-0.5, height, -(number * STEP_SIZE + 0.2)]}
+            end={[-0.5, -0.5, -(number * STEP_SIZE + 0.2)]}
             linewidth={0.5}
           />
           <Line
-            start={[width, -0.5, -(number * stepSize + 0.2)]}
-            end={[-0.5, -0.5, -(number * stepSize + 0.2)]}
+            start={[width, -0.5, -(number * STEP_SIZE + 0.2)]}
+            end={[-0.5, -0.5, -(number * STEP_SIZE + 0.2)]}
             linewidth={0.5}
           />
           <Text
             x={-0.75}
             y={0}
-            z={-(number * stepSize + 0.2)}
+            z={-(number * STEP_SIZE + 0.2)}
             content={startDate + number}
           />
         </group>

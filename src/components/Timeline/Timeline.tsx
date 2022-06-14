@@ -27,7 +27,7 @@ const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
             x={-0.75}
             y={0}
             z={-(number * STEP_SIZE + 0.2)}
-            content={startDate + number}
+            content={(startDate + number).toString()}
           />
         </group>
       ))}

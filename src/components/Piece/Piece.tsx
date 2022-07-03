@@ -19,11 +19,14 @@ const Piece: React.FC<IPiece> = (props: IPiece) => {
     owner,
     medium,
     artist,
+    id,
   } = props;
 
   const mesh = createRef<Mesh<BufferGeometry, Material | Material[]>>();
 
   const z = -(year - 1501) * STEP_SIZE;
+
+  const link = `https://lucascranach.org/de/${id}/`;
 
   return (
     <>
@@ -64,6 +67,15 @@ const Piece: React.FC<IPiece> = (props: IPiece) => {
         z={z}
         content={owner}
         color='red'
+        size={0.02}
+      />
+      <Text
+        x={indentation - 0.2}
+        y={-0.5}
+        z={z}
+        content={'Reference'}
+        href={link}
+        color='blue'
         size={0.02}
       />
     </>

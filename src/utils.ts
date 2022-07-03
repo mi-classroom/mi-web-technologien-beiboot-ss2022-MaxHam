@@ -6,7 +6,16 @@ const sortPiecesJson = (pieces: any): IPiece[] => {
     (item: any) => item.isBestOf === true
   );
   // sort filtered pieces by sortingNumber
-  const filteredItemsSorted: any[] = filteredItems.sort((a: any, b: any) =>
+  const filteredItemsSorted: any[] = sortByYear(filteredItems);
+
+  // map only necessary data
+  const finalItems: IPiece[] = parseToPieces(filteredItemsSorted);
+
+  return finalItems;
+};
+
+const sortByYear = (items: any[]) =>
+  items.sort((a: any, b: any) =>
     a.sortingInfo.year > b.sortingInfo.year
       ? 1
       : b.sortingInfo.year > a.sortingInfo.year
@@ -14,8 +23,8 @@ const sortPiecesJson = (pieces: any): IPiece[] => {
       : 0
   );
 
-  // map only necessary data
-  const finalItems: IPiece[] = filteredItemsSorted.map((item: any): IPiece => {
+const parseToPieces = (items: any[]): IPiece[] =>
+  items.map((item: any): IPiece => {
     return {
       id: item.metadata.id,
       title: item.metadata.title,
@@ -34,9 +43,6 @@ const sortPiecesJson = (pieces: any): IPiece[] => {
       dimensions: item.dimensions,
     };
   });
-
-  return finalItems;
-};
 
 const removeTextInBrackets = (text: string) => {
   const roundBracketsRemoved = text.split('(')[0];

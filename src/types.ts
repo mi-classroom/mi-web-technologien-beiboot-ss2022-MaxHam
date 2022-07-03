@@ -36,6 +36,7 @@ interface IText {
   content: string;
   size?: number;
   color?: string;
+  href?: string;
 }
 interface IGallery {
   pieces: IPiece[];

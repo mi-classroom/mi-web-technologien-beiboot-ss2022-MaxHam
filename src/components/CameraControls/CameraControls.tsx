@@ -9,14 +9,13 @@ const CameraControls: React.FC = () => {
   const ref = useRef();
   const [activeLook, setActiveLook] = useState(false);
 
+  /** enable looking around */
   const handleMouseDown = (e) => {
-    console.log(e);
-
     setActiveLook(true);
   };
 
+  /** disable looking around */
   const handleMouseUp = (e) => {
-    console.log(e);
     setActiveLook(false);
   };
 
@@ -26,6 +25,11 @@ const CameraControls: React.FC = () => {
 
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
   }, []);
 
   useFrame((state, delta) => {

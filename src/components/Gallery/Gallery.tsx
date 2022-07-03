@@ -52,7 +52,6 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
         </>
       </Physics>
       <ambientLight intensity={0.3} />
-
       <pointLight intensity={0.8} position={[5, 0, 5]} />
       <CameraControls />
     </Canvas>

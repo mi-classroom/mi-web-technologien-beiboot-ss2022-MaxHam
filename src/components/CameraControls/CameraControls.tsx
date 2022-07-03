@@ -1,44 +1,27 @@
 import { extend, useFrame, useThree } from '@react-three/fiber';
-import { useRef } from 'react';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { useEffect, useRef } from 'react';
+import { FlyControls } from 'three/examples/jsm/controls/FlyControls';
 
-extend({ OrbitControls });
+extend({ FlyControls });
 
-interface ICameraControls {
-  xCoord: number;
-  zCoord: number;
-}
+const CameraControls: React.FC = () => {
+  const { camera } = useThree();
 
-const CameraControls: React.FC<ICameraControls> = (props: ICameraControls) => {
-  const { zCoord, xCoord } = props;
+  useEffect(() => {
+    // focus camera on backside
+    camera.lookAt(0, -1, -1000);
+  }, []);
 
-  const {
-    camera,
-    gl: { domElement },
-  } = useThree();
-  const controls = useRef();
-
-  console.log(controls?.current);
-
-  useFrame((state) => {
+  const ref = useRef();
+  useFrame((state, delta) => {
     // @ts-ignore
-    controls?.current?.target?.set(xCoord, 0, zCoord);
-    // @ts-ignore
-    controls?.current?.object?.position?.set(xCoord, 0.1, zCoord + 0.5);
-    // @ts-ignore
-    controls?.current?.update();
+    ref.current.update(delta);
   });
-
   return (
-    // @ts-ignore
-    <orbitControls
-      ref={controls}
-      domElement={domElement}
-      args={[camera, domElement]}
-      enableRotate={true}
-      rotateSpeed={0.1}
-    />
+    <>
+      {/* @ts-ignore */}
+      <flyControls ref={ref} args={[camera]} movementSpeed={3} />
+    </>
   );
 };
-
 export default CameraControls;

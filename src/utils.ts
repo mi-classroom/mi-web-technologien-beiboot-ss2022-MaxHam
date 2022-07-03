@@ -1,5 +1,43 @@
 import { IPiece } from './types';
 
+const sortPiecesJson = (pieces: any): IPiece[] => {
+  // get only isBestOf pieces
+  const filteredItems: any[] = pieces.items.filter(
+    (item: any) => item.isBestOf === true
+  );
+  // sort filtered pieces by sortingNumber
+  const filteredItemsSorted: any[] = filteredItems.sort((a: any, b: any) =>
+    a.sortingInfo.year > b.sortingInfo.year
+      ? 1
+      : b.sortingInfo.year > a.sortingInfo.year
+      ? -1
+      : 0
+  );
+
+  // map only necessary data
+  const finalItems: IPiece[] = filteredItemsSorted.map((item: any): IPiece => {
+    return {
+      id: item.metadata.id,
+      title: item.metadata.title,
+      img: item.images.overall.images[0].sizes.medium.src,
+      date: item.metadata.date,
+      medium: removeTextInBrackets(item.medium),
+      owner: item.owner,
+      width: item.images.overall.images[0].sizes.medium
+        ? item.images.overall.images[0].sizes.medium.dimensions.width
+        : 1,
+      height: item.images.overall.images[0].sizes.medium
+        ? item.images.overall.images[0].sizes.medium.dimensions.height
+        : 1,
+      year: item.sortingInfo.year,
+      artist: item.involvedPersons[0].name,
+      dimensions: item.dimensions,
+    };
+  });
+
+  return finalItems;
+};
+
 const removeTextInBrackets = (text: string) => {
   const roundBracketsRemoved = text.split('(')[0];
 
@@ -69,4 +107,10 @@ const calculatePieceScale = (item: IPiece) => {
   return (size / 100) * scalingFactor;
 };
 
-export { removeTextInBrackets, getImage, groupByYear, calculatePieceScale };
+export {
+  removeTextInBrackets,
+  getImage,
+  groupByYear,
+  calculatePieceScale,
+  sortPiecesJson,
+};

@@ -1,58 +1,59 @@
 {
-	"name": "mi-web-technologien-beiboot-ss2022-maxham",
-	"homepage": "./",
-	"version": "0.1.0",
-	"proxy": "http://localhost:3000",
-	"private": true,
-	"browser": {
-		"fs": false,
-		"path": false,
-		"os": false
-	},
-	"dependencies": {
-		"@react-three/cannon": "^6.3.0",
-		"@react-three/drei": "^9.13.0",
-		"@react-three/fiber": "^8.0.23",
-		"@types/jest": "^27.5.0",
-		"@types/node": "^16.11.33",
-		"@types/react": "^18.0.8",
-		"@types/react-dom": "^18.0.3",
-		"@types/three": "^0.141.0",
-		"express-basic-auth": "^1.2.1",
-		"fs": "^0.0.1-security",
-		"react": "^18.1.0",
-		"react-dom": "^18.1.0",
-		"react-scripts": "5.0.1",
-		"sass": "^1.51.0",
-		"svgo": "^2.8.0",
-		"three": "^0.141.0",
-		"typescript": "^4.6.4",
-		"web-vitals": "^2.1.4"
-	},
-	"scripts": {
-		"start:client": "react-scripts start",
-		"start": "cd express && node server.ts",
-		"build": "react-scripts build",
-		"heroku-postbuild": "cd express && npm install",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+  "name": "mi-web-technologien-beiboot-ss2022-maxham",
+  "homepage": "./",
+  "version": "0.1.0",
+  "proxy": "http://localhost:3000",
+  "private": true,
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
+  "dependencies": {
+    "@react-three/cannon": "^6.3.0",
+    "@react-three/drei": "^9.13.0",
+    "@react-three/fiber": "^8.0.23",
+    "@types/jest": "^27.5.0",
+    "@types/node": "^16.11.33",
+    "@types/react": "^18.0.8",
+    "@types/react-dom": "^18.0.3",
+    "@types/three": "^0.141.0",
+    "camera-controls": "^1.34.6",
+    "express-basic-auth": "^1.2.1",
+    "fs": "^0.0.1-security",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-scripts": "5.0.1",
+    "sass": "^1.51.0",
+    "svgo": "^2.8.0",
+    "three": "^0.141.0",
+    "typescript": "^4.6.4",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "dev": "react-scripts start",
+    "start": "cd express && node server.ts",
+    "build": "react-scripts build",
+    "heroku-postbuild": "cd express && npm install",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

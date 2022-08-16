@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { IGallery, IPiece } from '../../types';
 import { calculatePieceScale, getPieceById, getPieceReference, groupByYear } from '../../utils';
 import CameraControls from '../CameraControls/CameraControls';
+import Overlay from '../Overlay';
 import PhyPlane from '../PhyPlane/PhyPlane';
 import Piece from '../Piece';
 import Timeline from '../Timeline/Timeline';
@@ -20,16 +21,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
 
   return (
     <>
-    {selectedPiece && ( 
-     <div className='overlay'>
-       <h3>{selectedPiece.title}</h3>
-       <p>{selectedPiece.artist}</p>
-       <p>{selectedPiece.medium}</p>
-       <p>{selectedPiece.owner}</p>
-       <a target='_blank' href={getPieceReference(selectedPiece.id)}>Reference</a>
-      </div>  ) 
-    }
-    
+    <Overlay  selectedPiece={selectedPiece} />
       <Canvas>
         <Physics>
           <>

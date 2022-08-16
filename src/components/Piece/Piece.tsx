@@ -1,6 +1,7 @@
 import { Image } from '@react-three/drei';
-import { createRef } from 'react';
-import { BufferGeometry, Material, Mesh } from 'three';
+import { useThree } from '@react-three/fiber';
+import { createRef, useRef , useEffect} from 'react';
+import { BufferGeometry, Material, Mesh, Object3D } from 'three';
 import { STEP_SIZE } from '../../constants';
 import { IPiece } from '../../types';
 import { getImage } from '../../utils';
@@ -15,12 +16,14 @@ const Piece: React.FC<IPiece> = (props: IPiece) => {
     year,
     scale,
     onSelect,
-    id
+    id,
+    references
   } = props;
-
-  const mesh = createRef<Mesh<BufferGeometry, Material | Material[]>>();
+  const mesh = useRef<Mesh<BufferGeometry, Material | Material[]>>();
 
   const z = -(year - 1501) * STEP_SIZE;
+
+console.log(references)
 
   return (
       <mesh ref={mesh} position={[indentation, 0, z]} onClick={onSelect(id)} >

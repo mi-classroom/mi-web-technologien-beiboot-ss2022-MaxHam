@@ -7,13 +7,3 @@
 	grid-template-columns: auto auto auto;
 	grid-gap: $bfs;
 }
-
-.overlay {
-	position: absolute;
-	z-index: 1000;
-	margin: $l; 
-	padding: $m; 
-	background-color: rgba($dark, 0.5);
-	// opacity: 0.9;
-	border-radius: $radius-m;
-}

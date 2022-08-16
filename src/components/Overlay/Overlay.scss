@@ -1,0 +1,14 @@
+
+@import "../../assets/styles/scss/abstracts/variables.scss";
+
+.overlay {
+	position: absolute;
+	z-index: 1000;
+	margin: $l; 
+	padding: $m; 
+	background-color: rgba($dark, 0.5);
+	border-radius: $radius-m;
+	h3,p {
+		color: $lighter ;
+	}	
+}

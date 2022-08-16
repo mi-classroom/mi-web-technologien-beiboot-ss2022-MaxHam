@@ -1,6 +1,10 @@
 import { PlaneProps } from '@react-three/cannon';
 import { BufferGeometry, Material, Mesh } from 'three';
 
+interface IOverlay {
+  selectedPiece: IPiece;
+}
+
 interface IPiece extends PlaneProps {
   title: string;
   img: string;
@@ -43,4 +47,4 @@ interface IGallery {
   pieces: IPiece[];
 }
 
-export type { IPiece, IGallery, ILine, IText, ITimeLine };
+export type { IPiece, IGallery, ILine, IText, ITimeLine , IOverlay};

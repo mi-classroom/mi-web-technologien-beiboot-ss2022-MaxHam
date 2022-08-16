@@ -1,4 +1,5 @@
 import { PlaneProps } from '@react-three/cannon';
+import { BufferGeometry, Material, Mesh } from 'three';
 
 interface IPiece extends PlaneProps {
   title: string;
@@ -12,10 +13,10 @@ interface IPiece extends PlaneProps {
   year: number;
   artist: string;
   dimensions: string;
-
+  references: any;
   // component props
   indentation?: number;
-
+  onSelect?: any;
   scale?: number;
 }
 

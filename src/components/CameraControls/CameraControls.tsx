@@ -11,7 +11,9 @@ const CameraControls: React.FC = () => {
 
   /** enable looking around */
   const handleMouseDown = (e) => {
-    setActiveLook(true);
+    if(e.button === 2) {
+      setActiveLook(true);
+    }
   };
 
   /** disable looking around */

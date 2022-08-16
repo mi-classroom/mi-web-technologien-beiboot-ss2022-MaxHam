@@ -1,3 +1,4 @@
+import React from 'react';
 import { IPiece } from './types';
 
 const sortPiecesJson = (pieces: any): IPiece[] => {
@@ -41,6 +42,7 @@ const parseToPieces = (items: any[]): IPiece[] =>
       year: item.sortingInfo.year,
       artist: item.involvedPersons[0].name,
       dimensions: item.dimensions,
+      references: item.references,
     };
   });
 
@@ -70,7 +72,7 @@ const groupByYear = (items: IPiece[]) => {
 
 const calculatePieceScale = (item: IPiece) => {
   const split = item.dimensions.replace(/[\])}[{(]/g, ' ').split(' ');
-  const scalingFactor = 0.8;
+  const scalingFactor = 0.000008;
   const splitWithoutCM = split.filter(
     (string) => string !== 'cm' && string !== ''
   );
@@ -110,10 +112,21 @@ const calculatePieceScale = (item: IPiece) => {
       break;
   }
 
-  return (size / 100) * scalingFactor;
+  return size* scalingFactor;
 };
 
+
+const getPieceReference = (id: string) => {
+  return `https://lucascranach.org/de/${id}/`;
+}
+
+const getPieceById = (id: string, pieces: IPiece[]) => {
+  return pieces.find((value)=> value.id === id)
+}
+
 export {
+  getPieceById,
+  getPieceReference,
   removeTextInBrackets,
   getImage,
   groupByYear,

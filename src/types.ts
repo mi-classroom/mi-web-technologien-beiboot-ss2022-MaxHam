@@ -1,8 +1,12 @@
 import { PlaneProps } from '@react-three/cannon';
-import { BufferGeometry, Material, Mesh } from 'three';
+import { BufferGeometry, Material, Mesh, Vector3 } from 'three';
 
 interface IOverlay {
   selectedPiece: IPiece;
+}
+
+interface ISpotlight {
+  selectedPieceRef: any;
 }
 
 interface IPiece extends PlaneProps {
@@ -18,11 +22,14 @@ interface IPiece extends PlaneProps {
   artist: string;
   dimensions: string;
   references: any;
-  // component props
-  indentation?: number;
-  onSelect?: any;
-  scale?: number;
 }
+
+interface IPieceComponent extends Mesh {
+  imgScale?: [x: number, y: number, z: number];
+  img: string;
+  pieceId: string;
+  onSelect?: (key: string) => (e) => void;
+} 
 
 interface ILine {
   start: [x: number, y: number, z: number];
@@ -47,4 +54,4 @@ interface IGallery {
   pieces: IPiece[];
 }
 
-export type { IPiece, IGallery, ILine, IText, ITimeLine , IOverlay};
+export type { IPiece, IPieceComponent, IGallery, ILine, IText, ITimeLine , IOverlay, ISpotlight};

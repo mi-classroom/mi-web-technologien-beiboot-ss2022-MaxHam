@@ -1,9 +1,10 @@
 import { Physics } from '@react-three/cannon';
 import { Canvas } from '@react-three/fiber';
-import React, { useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
+import { BufferGeometry, Material, Mesh } from 'three';
 import { IGallery, IPiece } from '../../types';
-import { calculatePieceScale, getPieceById, getPieceReference, groupByYear } from '../../utils';
-import CameraControls from '../CameraControls/CameraControls';
+import { calculatePieceScale, determinePiecePosition, getPieceById, groupByYear } from '../../utils';
+import CameraControls from '../CameraControls';
 import Overlay from '../Overlay';
 import PhyPlane from '../PhyPlane/PhyPlane';
 import Piece from '../Piece';
@@ -13,15 +14,28 @@ import './Gallery.scss';
 const Gallery: React.FC<IGallery> = (props: IGallery) => {
   const { pieces } = props;
   const [selectedPiece, setSelectedPiece]  = useState<IPiece>(null)
+  const [pieceRefs, setPieceRefs]  = useState<any>(null)
+  const selectedPieceRef = useRef<Mesh<BufferGeometry, Material | Material[]>>()
+
+  // useEffect(()=> {
+  //   setPieceRefs((elRefs) =>
+  //   pieces
+  //     .map((item, i) => elRefs[item.id] || createRef()),
+  // );
+  // }, [pieces])
 
   const handleClick = (id) => (e) => {
     const piece: IPiece = getPieceById(id, pieces)
+    // selectedPieceRef.current = refs.current.find((el)=> {
+    //   console.log(el.name)
+    //   console.log(id)
+    //   return (el.name === id)})
     setSelectedPiece(piece);
   };
-
+console.log(pieceRefs)
   return (
     <>
-    <Overlay  selectedPiece={selectedPiece} />
+    <Overlay selectedPiece={selectedPiece} />
       <Canvas>
         <Physics>
           <>
@@ -30,25 +44,17 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
               position={[0, -1, 0]}
               rotation={[-Math.PI / 2, 0, 0]}
             />
-            {pieces && groupByYear(pieces).map((group: IPiece[], year: number) => {
+            {pieces && groupByYear(pieces).map((group: IPiece[]) => {
               return group.map((item: IPiece, index: number) => (
+                // @ts-ignore
                 <Piece
                   key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  date={item.date}
+                  pieceId={item.id}
                   img={item.img}
-                  medium={item.medium}
-                  owner={item.owner}
-                  year={item.year}
-                  indentation={index}
-                  width={item.width}
-                  height={item.height}
-                  artist={item.artist}
-                  references={item.references}
-                  dimensions={item.dimensions}
-                  scale={calculatePieceScale(item)}
+                  position={determinePiecePosition(index, item.year)}
+                  imgScale={calculatePieceScale(item)}
                   onSelect={handleClick}
+                  // ref={pieceRefs[item.id]}
                 />
               ));
             })}
@@ -62,6 +68,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
         </Physics>
         <ambientLight intensity={0.3} />
         <pointLight intensity={0.8} position={[5, 0, 5]} />
+        <spotLight intensity={1} position={selectedPieceRef?.current?.position} target={selectedPieceRef?.current} angle={0.2} />
         <CameraControls />
       </Canvas>
     </>

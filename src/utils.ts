@@ -1,4 +1,6 @@
 import React from 'react';
+import { Vector3 } from 'three';
+import { STEP_SIZE } from './constants';
 import { IPiece } from './types';
 
 const sortPiecesJson = (pieces: any): IPiece[] => {
@@ -70,7 +72,7 @@ const groupByYear = (items: IPiece[]) => {
   return groups;
 };
 
-const calculatePieceScale = (item: IPiece) => {
+const calculatePieceScale = (item: IPiece): [x: number, y: number, z: number] => {
   const split = item.dimensions.replace(/[\])}[{(]/g, ' ').split(' ');
   const scalingFactor = 0.000008;
   const splitWithoutCM = split.filter(
@@ -112,7 +114,7 @@ const calculatePieceScale = (item: IPiece) => {
       break;
   }
 
-  return size* scalingFactor;
+  return  [(item.width) * (size* scalingFactor), (item.height) * (size * scalingFactor), 1]
 };
 
 
@@ -124,7 +126,21 @@ const getPieceById = (id: string, pieces: IPiece[]) => {
   return pieces.find((value)=> value.id === id)
 }
 
+
+const determinePiecePosition = (indentation: number, year: number): Vector3 => {
+ const z = -(year - 1501) * STEP_SIZE;
+
+ return new Vector3(indentation, 0, z)
+}
+
+const determinePieceScale = (width: number, height: number, scale: number) => [(width) * scale, (height) * scale, 1]
+
+
+
+
 export {
+  determinePieceScale,
+  determinePiecePosition,
   getPieceById,
   getPieceReference,
   removeTextInBrackets,

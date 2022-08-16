@@ -1,39 +1,30 @@
 import { Image } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
-import { createRef, useRef , useEffect} from 'react';
-import { BufferGeometry, Material, Mesh, Object3D } from 'three';
-import { STEP_SIZE } from '../../constants';
-import { IPiece } from '../../types';
+import React from 'react';
+import { IPieceComponent } from '../../types';
 import { getImage } from '../../utils';
 import './Piece.scss';
 
-const Piece: React.FC<IPiece> = (props: IPiece) => {
+const Piece = React.forwardRef((props: IPieceComponent, mesh: any) => {
   const {
     img,
-    width,
-    height,
-    indentation = 1,
-    year,
-    scale,
+    imgScale,
     onSelect,
-    id,
-    references
+    pieceId,
+    position,
+    ...otherProps
   } = props;
-  const mesh = useRef<Mesh<BufferGeometry, Material | Material[]>>();
 
-  const z = -(year - 1501) * STEP_SIZE;
 
-console.log(references)
 
   return (
-      <mesh ref={mesh} position={[indentation, 0, z]} onClick={onSelect(id)} >
+      <mesh {...otherProps} ref={mesh} position={position} onClick={onSelect(pieceId)} name={pieceId} >
         <Image
           url={getImage(img)}
           // @ts-ignore
-          scale={[(width) * scale, (height) * scale, 1]}
+          scale={imgScale}
         />
       </mesh>
   );
-};
+});
 
 export default Piece;

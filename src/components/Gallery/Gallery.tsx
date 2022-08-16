@@ -26,7 +26,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
        <p>{selectedPiece.artist}</p>
        <p>{selectedPiece.medium}</p>
        <p>{selectedPiece.owner}</p>
-       <a href={getPieceReference(selectedPiece.id)}>Reference</a>
+       <a target='_blank' href={getPieceReference(selectedPiece.id)}>Reference</a>
       </div>  ) 
     }
     

@@ -16,6 +16,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
   const [selectedPiece, setSelectedPiece]  = useState<IPiece>(null)
   const [pieceRefs, setPieceRefs]  = useState<any>(null)
   const selectedPieceRef = useRef<Mesh<BufferGeometry, Material | Material[]>>()
+  const [showRelations, setShowRelations] =  useState<boolean>(false)
 
   // useEffect(()=> {
   //   setPieceRefs((elRefs) =>
@@ -31,11 +32,18 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
     //   console.log(id)
     //   return (el.name === id)})
     setSelectedPiece(piece);
+
+    // when changing selected piece we want the relations to be hidden
+    setShowRelations(false)
   };
-console.log(pieceRefs)
+
+  const triggerRelations = (checked: boolean) => {
+    setShowRelations(checked)
+  }
+
   return (
     <>
-    <Overlay selectedPiece={selectedPiece} />
+    <Overlay selectedPiece={selectedPiece} showRelations={showRelations} onTriggerRelations={triggerRelations} />
       <Canvas>
         <Physics>
           <>
@@ -54,6 +62,7 @@ console.log(pieceRefs)
                   position={determinePiecePosition(index, item.year)}
                   imgScale={calculatePieceScale(item)}
                   onSelect={handleClick}
+                  selected={selectedPiece?.id === item.id }
                   // ref={pieceRefs[item.id]}
                 />
               ));
@@ -68,7 +77,7 @@ console.log(pieceRefs)
         </Physics>
         <ambientLight intensity={0.3} />
         <pointLight intensity={0.8} position={[5, 0, 5]} />
-        <spotLight intensity={1} position={selectedPieceRef?.current?.position} target={selectedPieceRef?.current} angle={0.2} />
+        {/* <spotLight intensity={1} position={selectedPieceRef?.current?.position} target={selectedPieceRef?.current} angle={0.2} /> */}
         <CameraControls />
       </Canvas>
     </>

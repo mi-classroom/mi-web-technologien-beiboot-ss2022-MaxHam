@@ -2,9 +2,9 @@ import { Box } from '@react-three/drei';
 import { ILine } from '../../types';
 
 const CustomLine: React.FC<ILine> = (props: ILine) => {
-  const { start, end } = props;
+  const { start, end, color: propColor } = props;
   const linewidth = 0.0075;
-  const color = '#000000';
+  const color: string = propColor || '#000000';
 
   function calcLength(start: number, end: number) {
     return end - start;

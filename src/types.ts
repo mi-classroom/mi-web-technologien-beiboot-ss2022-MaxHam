@@ -3,7 +3,10 @@ import { BufferGeometry, Material, Mesh, Vector3 } from 'three';
 
 interface IOverlay {
   selectedPiece: IPiece;
+  showRelations: boolean;
+  onTriggerRelations: (checked: boolean) => void
 }
+
 
 interface ISpotlight {
   selectedPieceRef: any;
@@ -28,12 +31,18 @@ interface IPieceComponent extends Mesh {
   imgScale?: [x: number, y: number, z: number];
   img: string;
   pieceId: string;
+  selected: boolean;
   onSelect?: (key: string) => (e) => void;
 } 
 
 interface ILine {
   start: [x: number, y: number, z: number];
   end: [x: number, y: number, z: number];
+  color?: string;
+}
+
+interface IEdges {
+  geometry: any; 
 }
 
 interface ITimeLine {
@@ -54,4 +63,4 @@ interface IGallery {
   pieces: IPiece[];
 }
 
-export type { IPiece, IPieceComponent, IGallery, ILine, IText, ITimeLine , IOverlay, ISpotlight};
+export type { IEdges, IPiece, IPieceComponent, IGallery, ILine, IText, ITimeLine , IOverlay, ISpotlight};

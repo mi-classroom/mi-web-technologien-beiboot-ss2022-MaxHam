@@ -5,7 +5,12 @@ import './Overlay.scss';
 
 const Overlay: React.FC<IOverlay> = (props: IOverlay) => {
 
-const {selectedPiece}  = props;
+const {selectedPiece, onTriggerRelations, showRelations}  = props;
+
+
+const handleChange = (e) => {
+  onTriggerRelations(e.target.checked)
+}
   
 return selectedPiece &&(
      <div className='overlay'>
@@ -13,7 +18,11 @@ return selectedPiece &&(
        <p>{selectedPiece.artist}</p>
        <p>{selectedPiece.medium}</p>
        <p>{selectedPiece.owner}</p>
-       <a target='_blank' rel="noreferrer" href={getPieceReference(selectedPiece.id)}>Reference</a>
+       <a target='_blank' rel="noreferrer" href={getPieceReference(selectedPiece.id)}>Referenz</a>
+       <br />
+       
+       <input type='checkbox' checked={showRelations} onChange={handleChange} />
+       <label>Zeige verwandte Gemälde an </label>
       </div>   
   );
 };

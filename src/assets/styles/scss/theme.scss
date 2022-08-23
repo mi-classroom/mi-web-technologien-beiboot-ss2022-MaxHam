@@ -22,10 +22,16 @@
         line-height: $lh-normal;
     }
 
+    button {
+        background-color: $accent;
+        border-radius:$radius-m ;
+        border: 0px;
+    }
+
     button > label {
         font-family: $font-sans-serif;
         font-weight: $fw-bold;
         line-height: $lh-normal;
-        color: $darkest; 
+        color: $dark; 
     }
 }

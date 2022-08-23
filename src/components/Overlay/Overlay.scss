@@ -3,6 +3,7 @@
 
 .overlay {
 	position: absolute;
+	display:block;
 	z-index: 1000;
 	margin: $l; 
 	padding: $m; 
@@ -11,4 +12,12 @@
 	h3,p {
 		color: $lighter ;
 	}	
+	label {
+		margin-left: $s;
+		color: $lighter ;
+	}
+	input {
+		margin-top: $s;
+	}	
+
 }

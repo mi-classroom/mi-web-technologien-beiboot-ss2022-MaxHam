@@ -1,30 +1,40 @@
 import { Image } from '@react-three/drei';
-import React from 'react';
+import React, {useRef} from 'react';
 import { IPieceComponent } from '../../types';
 import { getImage } from '../../utils';
+import Line from '../Line';
 import './Piece.scss';
 
-const Piece = React.forwardRef((props: IPieceComponent, mesh: any) => {
+const Piece =(props: IPieceComponent) => {
   const {
     img,
     imgScale,
     onSelect,
     pieceId,
     position,
+    selected,
     ...otherProps
   } = props;
 
 
 
+  const meshRef = useRef()
+  const imgRef = useRef()
+  console.log(imgRef)
+
   return (
-      <mesh {...otherProps} ref={mesh} position={position} onClick={onSelect(pieceId)} name={pieceId} >
+    <>      
+      <mesh {...otherProps} ref={meshRef} position={position} onClick={onSelect(pieceId)} name={pieceId} >
         <Image
           url={getImage(img)}
           // @ts-ignore
           scale={imgScale}
+          ref={imgRef}
         />
       </mesh>
-  );
-});
+      {selected && <Line color='#fc0' start={[position.x,  position.y, position.z]} end={[position.x, -0.5, position.z]} />}
+    </>
+);
+};
 
 export default Piece;

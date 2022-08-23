@@ -44,7 +44,7 @@ const parseToPieces = (items: any[]): IPiece[] =>
       year: item.sortingInfo.year,
       artist: item.involvedPersons[0].name,
       dimensions: item.dimensions,
-      references: item.references,
+      references: item.references.map((ref)=> ref.inventoryNumber),
     };
   });
 
@@ -135,10 +135,34 @@ const determinePiecePosition = (indentation: number, year: number): Vector3 => {
 
 const determinePieceScale = (width: number, height: number, scale: number) => [(width) * scale, (height) * scale, 1]
 
+const getRelatedPieces = (references: string[], pieces: IPiece[]) => {
+  return pieces.filter((piece) => references.includes(piece.id))
+}
 
+const findIndex = (searchValue: any, array: any[]) => {
+
+  const groupedArray =  groupByYear(array)
+
+  let foundIndex
+  groupedArray.every( (group) => {
+     const index = group.findIndex((element) => element.id === searchValue )
+     console.log(index)
+     if(index !== -1) {
+      foundIndex = index;
+      // every() stops as soonh as it returns a falsy value
+      return false;
+     }
+     return true;
+    });
+
+  console.log(foundIndex)
+  return foundIndex;
+}
 
 
 export {
+  findIndex,
+  getRelatedPieces,
   determinePieceScale,
   determinePiecePosition,
   getPieceById,

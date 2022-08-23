@@ -20,7 +20,6 @@ const Piece =(props: IPieceComponent) => {
 
   const meshRef = useRef()
   const imgRef = useRef()
-  console.log(imgRef)
 
   return (
     <>      
@@ -32,7 +31,7 @@ const Piece =(props: IPieceComponent) => {
           ref={imgRef}
         />
       </mesh>
-      {selected && <Line color='#fc0' start={[position.x,  position.y, position.z]} end={[position.x, -0.5, position.z]} />}
+      {selected && <Line color='#fc0' start={[position.x,  position.y, position.z + 0.01]} end={[position.x, -0.5, position.z + 0.01]} />}
     </>
 );
 };

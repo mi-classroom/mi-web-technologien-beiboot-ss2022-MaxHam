@@ -12,7 +12,7 @@ interface ISpotlight {
   selectedPieceRef: any;
 }
 
-interface IPiece extends PlaneProps {
+interface IPiece {
   title: string;
   img: string;
   date: string;
@@ -24,7 +24,7 @@ interface IPiece extends PlaneProps {
   year: number;
   artist: string;
   dimensions: string;
-  references: any;
+  references: string[];
 }
 
 interface IPieceComponent extends Mesh {

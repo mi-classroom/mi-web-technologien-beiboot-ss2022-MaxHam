@@ -1,10 +1,10 @@
 import { Physics } from '@react-three/cannon';
 import { Canvas } from '@react-three/fiber';
-import React, { createRef, useEffect, useRef, useState } from 'react';
-import { BufferGeometry, Material, Mesh } from 'three';
+import React, { useState } from 'react';
 import { IGallery, IPiece } from '../../types';
-import { calculatePieceScale, determinePiecePosition, getPieceById, groupByYear } from '../../utils';
+import { calculatePieceScale, determinePiecePosition, findIndex, getPieceById, getRelatedPieces, groupByYear } from '../../utils';
 import CameraControls from '../CameraControls';
+import Line from '../Line';
 import Overlay from '../Overlay';
 import PhyPlane from '../PhyPlane/PhyPlane';
 import Piece from '../Piece';
@@ -14,23 +14,13 @@ import './Gallery.scss';
 const Gallery: React.FC<IGallery> = (props: IGallery) => {
   const { pieces } = props;
   const [selectedPiece, setSelectedPiece]  = useState<IPiece>(null)
-  const [pieceRefs, setPieceRefs]  = useState<any>(null)
-  const selectedPieceRef = useRef<Mesh<BufferGeometry, Material | Material[]>>()
   const [showRelations, setShowRelations] =  useState<boolean>(false)
 
-  // useEffect(()=> {
-  //   setPieceRefs((elRefs) =>
-  //   pieces
-  //     .map((item, i) => elRefs[item.id] || createRef()),
-  // );
-  // }, [pieces])
+
 
   const handleClick = (id) => (e) => {
     const piece: IPiece = getPieceById(id, pieces)
-    // selectedPieceRef.current = refs.current.find((el)=> {
-    //   console.log(el.name)
-    //   console.log(id)
-    //   return (el.name === id)})
+ 
     setSelectedPiece(piece);
 
     // when changing selected piece we want the relations to be hidden
@@ -63,7 +53,6 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
                   imgScale={calculatePieceScale(item)}
                   onSelect={handleClick}
                   selected={selectedPiece?.id === item.id }
-                  // ref={pieceRefs[item.id]}
                 />
               ));
             })}
@@ -73,11 +62,24 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
                 endDate={pieces[pieces.length - 1].year}
               />
             )}
+            {selectedPiece && showRelations ?(
+              getRelatedPieces(selectedPiece.references, pieces).map((targetPiece)=> {
+                const selectedPiecePos = determinePiecePosition(findIndex(selectedPiece.id, pieces), selectedPiece.year)
+                const targetPiecePos = determinePiecePosition(findIndex(targetPiece.id, pieces), targetPiece.year)
+                const lineStart: [x: number, y: number, z: number] = [selectedPiecePos.x ,  -.5, selectedPiecePos.z + 0.01]
+                const lineEnd: [x: number, y: number, z: number] = [targetPiecePos.x,  -.5, targetPiecePos.z + 0.01]
+                
+              
+
+              return(
+                <Line color='#fc0' start={lineStart[0] > lineEnd[0] ? lineStart : lineEnd } end={lineStart[0] < lineEnd[0] ? lineStart : lineEnd}/>
+              )
+            })
+            ): (<></>)}
           </>
         </Physics>
         <ambientLight intensity={0.3} />
         <pointLight intensity={0.8} position={[5, 0, 5]} />
-        {/* <spotLight intensity={1} position={selectedPieceRef?.current?.position} target={selectedPieceRef?.current} angle={0.2} /> */}
         <CameraControls />
       </Canvas>
     </>

@@ -48,7 +48,7 @@ const CameraControls: React.FC = () => {
         lookSpeed={0.15}
         activeLook={activeLook}
         autoForward={false}
-        lookVertical={true}
+        lookVertical={false}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
       />

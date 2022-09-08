@@ -1,44 +1,58 @@
 import { extend, useFrame, useThree } from '@react-three/fiber';
-import { useRef } from 'react';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { useEffect, useRef, useState } from 'react';
+import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
 
-extend({ OrbitControls });
+extend({ FirstPersonControls });
 
-interface ICameraControls {
-  xCoord: number;
-  zCoord: number;
-}
+const CameraControls: React.FC = () => {
+  const { camera } = useThree();
+  const ref = useRef();
+  const [activeLook, setActiveLook] = useState(false);
 
-const CameraControls: React.FC<ICameraControls> = (props: ICameraControls) => {
-  const { zCoord, xCoord } = props;
+  /** enable looking around */
+  const handleMouseDown = (e) => {
+    if(e.button === 2) {
+      setActiveLook(true);
+    }
+  };
 
-  const {
-    camera,
-    gl: { domElement },
-  } = useThree();
-  const controls = useRef();
+  /** disable looking around */
+  const handleMouseUp = (e) => {
+    setActiveLook(false);
+  };
 
-  console.log(controls?.current);
+  useEffect(() => {
+    /* @ts-ignore */
+    ref.current.lookAt(0, 1, -1000);
 
-  useFrame((state) => {
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
+
+  useFrame((state, delta) => {
     // @ts-ignore
-    controls?.current?.target?.set(xCoord, 0, zCoord);
-    // @ts-ignore
-    controls?.current?.object?.position?.set(xCoord, 0.1, zCoord + 0.5);
-    // @ts-ignore
-    controls?.current?.update();
+    ref.current.update(delta);
   });
-
   return (
-    // @ts-ignore
-    <orbitControls
-      ref={controls}
-      domElement={domElement}
-      args={[camera, domElement]}
-      enableRotate={true}
-      rotateSpeed={0.1}
-    />
+    <>
+      {/* @ts-ignore */}
+      <firstPersonControls
+        ref={ref}
+        args={[camera]}
+        movementSpeed={3}
+        lookSpeed={0.15}
+        activeLook={activeLook}
+        autoForward={false}
+        lookVertical={false}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+      />
+    </>
   );
 };
-
 export default CameraControls;

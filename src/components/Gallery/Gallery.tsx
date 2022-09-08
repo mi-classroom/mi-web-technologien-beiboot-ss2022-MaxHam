@@ -2,8 +2,11 @@ import { Physics } from '@react-three/cannon';
 import { Canvas } from '@react-three/fiber';
 import React, { useState } from 'react';
 import { IGallery, IPiece } from '../../types';
-import { calculatePieceScale, groupByYear } from '../../utils';
-import CameraControls from '../CameraControls/CameraControls';
+import { calculatePieceScale, determinePiecePosition, findIndex, getPieceById, getRelatedPieces, groupByYear } from '../../utils';
+import CameraControls from '../CameraControls';
+import Line from '../Line';
+import Overlay from '../Overlay';
+import Legend from '../Legend';
 import PhyPlane from '../PhyPlane/PhyPlane';
 import Piece from '../Piece';
 import Timeline from '../Timeline/Timeline';
@@ -11,42 +14,29 @@ import './Gallery.scss';
 
 const Gallery: React.FC<IGallery> = (props: IGallery) => {
   const { pieces } = props;
+  const [selectedPiece, setSelectedPiece]  = useState<IPiece>(null)
+  const [showRelations, setShowRelations] =  useState<boolean>(false)
 
-  const [zCoord, setZCoord] = useState(0);
-  const [xCoord, setXCoord] = useState(0);
 
-  const increaseYear = () => {
-    setZCoord(zCoord - 1);
+
+  const handleClick = (id) => (e) => {
+    const piece: IPiece = getPieceById(id, pieces)
+ 
+    setSelectedPiece(piece);
+
+    // when changing selected piece we want the relations to be hidden
+    setShowRelations(false)
   };
 
-  const decreaseYear = () => {
-    setZCoord(zCoord + 1);
-  };
+  const triggerRelations = (checked: boolean) => {
+    setShowRelations(checked)
+  }
 
-  const goLeft = () => {
-    setXCoord(xCoord - 1);
-  };
-
-  const goRight = () => {
-    setXCoord(xCoord + 1);
-  };
-
-  const reset = () => {
-    setZCoord(1);
-    setXCoord(0);
-  };
   return (
     <>
-      <div className='overlay'>
-        <button onClick={increaseYear}>Go to next Year</button>
-        <button onClick={decreaseYear}>Go to last Year</button>
-        <button onClick={goLeft}>Go to left</button>
-        <button onClick={goRight}>Go to right</button>
-
-        <button onClick={reset}>Go to beginning</button>
-      </div>
-
-      <Canvas camera={{ position: [0, 0.5, 0] }}>
+    <Overlay selectedPiece={selectedPiece} showRelations={showRelations} onTriggerRelations={triggerRelations} />
+    <Legend />
+      <Canvas>
         <Physics>
           <>
             <PhyPlane
@@ -54,40 +44,45 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
               position={[0, -1, 0]}
               rotation={[-Math.PI / 2, 0, 0]}
             />
-
-            {groupByYear(pieces).map((group: IPiece[], year: number) => {
+            {pieces && groupByYear(pieces).map((group: IPiece[]) => {
               return group.map((item: IPiece, index: number) => (
+                // @ts-ignore
                 <Piece
                   key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  date={item.date}
+                  pieceId={item.id}
                   img={item.img}
-                  medium={item.medium}
-                  owner={item.owner}
-                  year={item.year}
-                  indentation={index}
-                  width={item.width}
-                  height={item.height}
-                  artist={item.artist}
-                  dimensions={item.dimensions}
-                  scale={calculatePieceScale(item)}
+                  position={determinePiecePosition(index, item.year)}
+                  imgScale={calculatePieceScale(item)}
+                  onSelect={handleClick}
+                  selected={selectedPiece?.id === item.id }
                 />
               ));
             })}
-
             {pieces && (
               <Timeline
                 startDate={pieces[0].year}
                 endDate={pieces[pieces.length - 1].year}
               />
             )}
+            {selectedPiece && showRelations ?(
+              getRelatedPieces(selectedPiece.references, pieces).map((targetPiece)=> {
+                const selectedPiecePos = determinePiecePosition(findIndex(selectedPiece.id, pieces), selectedPiece.year)
+                const targetPiecePos = determinePiecePosition(findIndex(targetPiece.id, pieces), targetPiece.year)
+                const lineStart: [x: number, y: number, z: number] = [selectedPiecePos.x ,  -.5, selectedPiecePos.z + 0.01]
+                const lineEnd: [x: number, y: number, z: number] = [targetPiecePos.x,  -.5, targetPiecePos.z + 0.01]
+                
+              
+
+              return(
+                <Line color='#fc0' start={lineStart[0] > lineEnd[0] ? lineStart : lineEnd } end={lineStart[0] < lineEnd[0] ? lineStart : lineEnd}/>
+              )
+            })
+            ): (<></>)}
           </>
         </Physics>
         <ambientLight intensity={0.3} />
-
         <pointLight intensity={0.8} position={[5, 0, 5]} />
-        <CameraControls zCoord={zCoord} xCoord={xCoord} />
+        <CameraControls />
       </Canvas>
     </>
   );

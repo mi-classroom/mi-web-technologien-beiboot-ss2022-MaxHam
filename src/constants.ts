@@ -1,3 +1,3 @@
-const STEP_SIZE = 1;
+const STEP_SIZE = 2;
 
 export { STEP_SIZE };

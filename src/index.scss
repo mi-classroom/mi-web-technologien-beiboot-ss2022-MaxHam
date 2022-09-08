@@ -1,13 +1,11 @@
 @import "./assets/styles/scss/abstracts/variables.scss";
+@import "assets/styles/scss/theme.scss";
 
 body {
+	@include theme;
 	margin: 0;
 	background-color: $lighter;
-	font-family: $font-sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-code {
-	font-family: $font-sans-serif;
-}

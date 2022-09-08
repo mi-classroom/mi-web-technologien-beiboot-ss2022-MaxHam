@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { IPiece } from './types';
+import { useState } from 'react';
 import './App.scss';
-import { removeTextInBrackets } from './utils';
 import Gallery from './components/Gallery';
-
+import { IPiece } from './types';
+import { sortPiecesJson } from './utils';
 function App() {
+  // only import instantly for dev purposes
   const [pieces, setPieces] = useState<IPiece[]>([]);
 
   const onFileChange = (event: any) => {
@@ -16,42 +16,7 @@ function App() {
 
     files[0].text().then(function (text: string) {
       var result = JSON.parse(text);
-
-      // get only isBestOf pieces
-      const filteredItems: any[] = result.items.filter(
-        (item: any) => item.isBestOf === true
-      );
-      // sort filtered pieces by sortingNumber
-      const filteredItemsSorted: any[] = filteredItems.sort((a: any, b: any) =>
-        a.sortingInfo.year > b.sortingInfo.year
-          ? 1
-          : b.sortingInfo.year > a.sortingInfo.year
-          ? -1
-          : 0
-      );
-
-      // map only necessary data
-      const finalItems: IPiece[] = filteredItemsSorted.map(
-        (item: any): IPiece => {
-          return {
-            id: item.metadata.id,
-            title: item.metadata.title,
-            img: item.images.overall.images[0].sizes.medium.src,
-            date: item.metadata.date,
-            medium: removeTextInBrackets(item.medium),
-            owner: item.owner,
-            width: item.images.overall.images[0].sizes.medium
-              ? item.images.overall.images[0].sizes.medium.dimensions.width
-              : 1,
-            height: item.images.overall.images[0].sizes.medium
-              ? item.images.overall.images[0].sizes.medium.dimensions.height
-              : 1,
-            year: item.sortingInfo.year,
-            artist: item.involvedPersons[0].name,
-            dimensions: item.dimensions,
-          };
-        }
-      );
+      const finalItems: IPiece[] = sortPiecesJson(result);
       setPieces(finalItems);
     });
   };

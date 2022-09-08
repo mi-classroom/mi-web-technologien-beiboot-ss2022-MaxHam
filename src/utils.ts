@@ -1,4 +1,52 @@
+import React from 'react';
+import { Vector3 } from 'three';
+import { STEP_SIZE } from './constants';
 import { IPiece } from './types';
+
+const sortPiecesJson = (pieces: any): IPiece[] => {
+  // get only isBestOf pieces
+  const filteredItems: any[] = pieces.items.filter(
+    (item: any) => item.isBestOf === true
+  );
+  // sort filtered pieces by sortingNumber
+  const filteredItemsSorted: any[] = sortByYear(filteredItems);
+
+  // map only necessary data
+  const finalItems: IPiece[] = parseToPieces(filteredItemsSorted);
+
+  return finalItems;
+};
+
+const sortByYear = (items: any[]) =>
+  items.sort((a: any, b: any) =>
+    a.sortingInfo.year > b.sortingInfo.year
+      ? 1
+      : b.sortingInfo.year > a.sortingInfo.year
+      ? -1
+      : 0
+  );
+
+const parseToPieces = (items: any[]): IPiece[] =>
+  items.map((item: any): IPiece => {
+    return {
+      id: item.metadata.id,
+      title: item.metadata.title,
+      img: item.images.overall.images[0].sizes.medium.src,
+      date: item.metadata.date,
+      medium: removeTextInBrackets(item.medium),
+      owner: item.owner,
+      width: item.images.overall.images[0].sizes.medium
+        ? item.images.overall.images[0].sizes.medium.dimensions.width
+        : 1,
+      height: item.images.overall.images[0].sizes.medium
+        ? item.images.overall.images[0].sizes.medium.dimensions.height
+        : 1,
+      year: item.sortingInfo.year,
+      artist: item.involvedPersons[0].name,
+      dimensions: item.dimensions,
+      references: item.references.map((ref)=> ref.inventoryNumber),
+    };
+  });
 
 const removeTextInBrackets = (text: string) => {
   const roundBracketsRemoved = text.split('(')[0];
@@ -24,9 +72,9 @@ const groupByYear = (items: IPiece[]) => {
   return groups;
 };
 
-const calculatePieceScale = (item: IPiece) => {
+const calculatePieceScale = (item: IPiece): [x: number, y: number, z: number] => {
   const split = item.dimensions.replace(/[\])}[{(]/g, ' ').split(' ');
-  const scalingFactor = 0.8;
+  const scalingFactor = 0.000008;
   const splitWithoutCM = split.filter(
     (string) => string !== 'cm' && string !== ''
   );
@@ -66,7 +114,62 @@ const calculatePieceScale = (item: IPiece) => {
       break;
   }
 
-  return (size / 100) * scalingFactor;
+  return  [(item.width) * (size* scalingFactor), (item.height) * (size * scalingFactor), 1]
 };
 
-export { removeTextInBrackets, getImage, groupByYear, calculatePieceScale };
+
+const getPieceReference = (id: string) => {
+  return `https://lucascranach.org/de/${id}/`;
+}
+
+const getPieceById = (id: string, pieces: IPiece[]) => {
+  return pieces.find((value)=> value.id === id)
+}
+
+
+const determinePiecePosition = (indentation: number, year: number): Vector3 => {
+ const z = -(year - 1501) * STEP_SIZE;
+
+ return new Vector3(indentation, 0, z)
+}
+
+const determinePieceScale = (width: number, height: number, scale: number) => [(width) * scale, (height) * scale, 1]
+
+const getRelatedPieces = (references: string[], pieces: IPiece[]) => {
+  return pieces.filter((piece) => references.includes(piece.id))
+}
+
+const findIndex = (searchValue: any, array: any[]) => {
+
+  const groupedArray =  groupByYear(array)
+
+  let foundIndex
+  groupedArray.every( (group) => {
+     const index = group.findIndex((element) => element.id === searchValue )
+     console.log(index)
+     if(index !== -1) {
+      foundIndex = index;
+      // every() stops as soonh as it returns a falsy value
+      return false;
+     }
+     return true;
+    });
+
+  console.log(foundIndex)
+  return foundIndex;
+}
+
+
+export {
+  findIndex,
+  getRelatedPieces,
+  determinePieceScale,
+  determinePiecePosition,
+  getPieceById,
+  getPieceReference,
+  removeTextInBrackets,
+  getImage,
+  groupByYear,
+  calculatePieceScale,
+  sortPiecesJson,
+};

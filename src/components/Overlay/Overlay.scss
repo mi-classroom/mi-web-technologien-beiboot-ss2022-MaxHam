@@ -1,0 +1,23 @@
+
+@import "../../assets/styles/scss/abstracts/variables.scss";
+
+.overlay {
+	position: absolute;
+	display:block;
+	z-index: 1000;
+	margin: $l; 
+	padding: $m; 
+	background-color: rgba($dark, 0.5);
+	border-radius: $radius-m;
+	h3,p {
+		color: $lighter ;
+	}	
+	label {
+		margin-left: $s;
+		color: $lighter ;
+	}
+	input {
+		margin-top: $s;
+	}	
+
+}

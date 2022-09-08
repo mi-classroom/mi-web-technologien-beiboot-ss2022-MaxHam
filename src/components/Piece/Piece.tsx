@@ -1,73 +1,39 @@
 import { Image } from '@react-three/drei';
-import { createRef } from 'react';
-import { BufferGeometry, Material, Mesh } from 'three';
-import { STEP_SIZE } from '../../constants';
-import { IPiece } from '../../types';
+import React, {useRef} from 'react';
+import { IPieceComponent } from '../../types';
 import { getImage } from '../../utils';
+import Line from '../Line';
 import './Piece.scss';
-import Text from '../Text/Text';
 
-const Piece: React.FC<IPiece> = (props: IPiece) => {
+const Piece =(props: IPieceComponent) => {
   const {
     img,
-    width,
-    height,
-    indentation = 1,
-    year,
-    scale,
-    title,
-    owner,
-    medium,
-    artist,
+    imgScale,
+    onSelect,
+    pieceId,
+    position,
+    selected,
+    ...otherProps
   } = props;
 
-  const mesh = createRef<Mesh<BufferGeometry, Material | Material[]>>();
 
-  const z = -(year - 1501) * STEP_SIZE;
+
+  const meshRef = useRef()
+  const imgRef = useRef()
 
   return (
-    <>
-      <mesh ref={mesh} position={[indentation, 0, z]}>
+    <>      
+      <mesh {...otherProps} ref={meshRef} position={position} onClick={onSelect(pieceId)} name={pieceId} >
         <Image
           url={getImage(img)}
           // @ts-ignore
-          scale={[(width / 1000) * scale, (height / 1000) * scale, 0]}
+          scale={imgScale}
+          ref={imgRef}
         />
       </mesh>
-      <Text
-        x={indentation - 0.2}
-        y={-0.3}
-        z={z}
-        content={title}
-        color='red'
-        size={0.02}
-      />
-      <Text
-        x={indentation - 0.2}
-        y={-0.35}
-        z={z}
-        content={artist}
-        color='red'
-        size={0.02}
-      />
-      <Text
-        x={indentation - 0.2}
-        y={-0.4}
-        z={z}
-        content={medium}
-        color='red'
-        size={0.02}
-      />
-      <Text
-        x={indentation - 0.2}
-        y={-0.45}
-        z={z}
-        content={owner}
-        color='red'
-        size={0.02}
-      />
+      {selected && <Line color='#fc0' start={[position.x,  position.y, position.z + 0.01]} end={[position.x, -0.5, position.z + 0.01]} />}
     </>
-  );
+);
 };
 
 export default Piece;

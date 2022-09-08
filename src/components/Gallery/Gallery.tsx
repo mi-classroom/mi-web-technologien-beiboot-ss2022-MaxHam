@@ -6,6 +6,7 @@ import { calculatePieceScale, determinePiecePosition, findIndex, getPieceById, g
 import CameraControls from '../CameraControls';
 import Line from '../Line';
 import Overlay from '../Overlay';
+import Legend from '../Legend';
 import PhyPlane from '../PhyPlane/PhyPlane';
 import Piece from '../Piece';
 import Timeline from '../Timeline/Timeline';
@@ -34,6 +35,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
   return (
     <>
     <Overlay selectedPiece={selectedPiece} showRelations={showRelations} onTriggerRelations={triggerRelations} />
+    <Legend />
       <Canvas>
         <Physics>
           <>

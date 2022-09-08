@@ -7,7 +7,6 @@ const Overlay: React.FC<IOverlay> = (props: IOverlay) => {
 
 const {selectedPiece, onTriggerRelations, showRelations}  = props;
 
-
 const handleChange = (e) => {
   onTriggerRelations(e.target.checked)
 }

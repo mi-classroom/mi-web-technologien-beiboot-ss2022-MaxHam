@@ -21,7 +21,7 @@ return selectedPiece &&(
        <a target='_blank' rel="noreferrer" href={getPieceReference(selectedPiece.id)}>Referenz</a>
        <br />
        
-       <input type='checkbox' checked={showRelations} onChange={handleChange} />
+       <input type='checkbox' checked={showRelations} onChange={handleChange} disabled={selectedPiece.references.length < 1} />
        <label>Zeige verwandte Gemälde an </label>
       </div>   
   );

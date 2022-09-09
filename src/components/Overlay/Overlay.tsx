@@ -21,10 +21,10 @@ const handleSliderChange = (e) => {
   
 return selectedPiece &&(
      <div className='overlay' tabIndex={0}>
-       <h3>{selectedPiece.title} <Speech text={selectedPiece.title} volume={volume} /></h3>
-       <p>{selectedPiece.artist} <Speech text={selectedPiece.artist} volume={volume}/></p>
-       <p>{selectedPiece.medium} <Speech text={selectedPiece.medium} volume={volume}/></p>
-       <p>{selectedPiece.owner}  <Speech text={selectedPiece.owner} volume={volume}/></p>
+       <h3>{selectedPiece.title} <Speech text={`Title ${selectedPiece.title}`} volume={volume} /></h3>
+       <p>{selectedPiece.artist} <Speech text={`Artist  ${selectedPiece.artist}`} volume={volume}/></p>
+       <p>{selectedPiece.medium} <Speech text={`Medium  ${selectedPiece.medium}`} volume={volume}/></p>
+       <p>{selectedPiece.owner}  <Speech text={`Owner  ${selectedPiece.owner}`} volume={volume}/></p>
        <a target='_blank' rel="noreferrer" href={getPieceReference(selectedPiece.id)}>Reference</a>
        <br />
        

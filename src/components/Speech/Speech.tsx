@@ -1,8 +1,8 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
-import './Speech.scss'
-import speaker from './speaker.svg'
+import speaker from './speaker.svg';
+import './Speech.scss';
 
 interface ISpeech {
     text: string,

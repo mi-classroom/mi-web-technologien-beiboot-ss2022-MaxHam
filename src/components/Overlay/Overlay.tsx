@@ -20,7 +20,7 @@ const handleSliderChange = (e) => {
   
   
 return selectedPiece &&(
-     <div className='overlay'>
+     <div className='overlay' tabIndex={0}>
        <h3>{selectedPiece.title} <Speech text={selectedPiece.title} volume={volume} /></h3>
        <p>{selectedPiece.artist} <Speech text={selectedPiece.artist} volume={volume}/></p>
        <p>{selectedPiece.medium} <Speech text={selectedPiece.medium} volume={volume}/></p>

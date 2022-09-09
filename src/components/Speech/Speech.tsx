@@ -1,13 +1,10 @@
 
 import React from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
+import { ISpeech } from '../../types';
 import speaker from './speaker.svg';
 import './Speech.scss';
 
-interface ISpeech {
-    text: string,
-    volume: number
-}
 
 const Speech: React.FC<ISpeech> = (props: ISpeech) => {
   const {text, volume} = props;

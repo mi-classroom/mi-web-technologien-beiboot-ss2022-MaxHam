@@ -14,7 +14,7 @@ import './Gallery.scss';
 
 const Gallery: React.FC<IGallery> = (props: IGallery) => {
   const { pieces } = props;
-  const [selectedPiece, setSelectedPiece]  = useState<IPiece>(null)
+  const [selectedPiece, setSelectedPiece]  = useState<IPiece>(pieces[0])
   const [showRelations, setShowRelations] =  useState<boolean>(false)
 
 

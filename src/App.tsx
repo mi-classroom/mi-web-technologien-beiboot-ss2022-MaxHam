@@ -27,8 +27,7 @@ function App() {
         <div className='start-screen'>
           <div className='upload-zone'>
             <h3>
-              Bitte laden Sie die JSON File hoch, um die Meisterwerke betrachten
-              zu können
+              Please upload the JSON file to see the artworks of Lucas Cranach
             </h3>
             <label className='upload-button'>
               <input
@@ -36,7 +35,7 @@ function App() {
                 onChange={onFileChange}
                 accept='application/JSON'
               />
-              Datei auswählen
+              Select file
             </label>
           </div>
         </div>

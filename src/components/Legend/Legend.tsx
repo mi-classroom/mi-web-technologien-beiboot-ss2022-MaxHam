@@ -12,8 +12,8 @@ return (
        <p><strong>Move Right:</strong> Arrow Right Key</p>
        <p><strong>Move Backwards:</strong> Arrow Down Key</p>
        <br/>
-       <p><strong>Select Piece:</strong> Mouse Left Click</p>
-       <p><strong>Rotate Camera:</strong>f Mouse Right Click</p>
+       <p><strong>Select Artwork:</strong> Mouse Left Click</p>
+       <p><strong>Rotate Camera:</strong>Mouse Right Click</p>
        
       </div>   
   );

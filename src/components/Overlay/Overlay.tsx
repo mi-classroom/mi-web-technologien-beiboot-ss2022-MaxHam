@@ -25,11 +25,11 @@ return selectedPiece &&(
        <p>{selectedPiece.artist} <Speech text={selectedPiece.artist} volume={volume}/></p>
        <p>{selectedPiece.medium} <Speech text={selectedPiece.medium} volume={volume}/></p>
        <p>{selectedPiece.owner}  <Speech text={selectedPiece.owner} volume={volume}/></p>
-       <a target='_blank' rel="noreferrer" href={getPieceReference(selectedPiece.id)}>Referenz</a>
+       <a target='_blank' rel="noreferrer" href={getPieceReference(selectedPiece.id)}>Reference</a>
        <br />
        
        <input type='checkbox' checked={showRelations} onChange={handleCheckboxChange} disabled={selectedPiece.references.length < 1} />
-       <label>Zeige verwandte Gemälde an </label>
+       <label>Show related artworks </label>
        <div className="slidecontainer">
        <label>Volume </label>
         <input  onChange={handleSliderChange} type="range" min="0.1" max="1" step='0.1' value={volume} className="slider" id="myRange" />

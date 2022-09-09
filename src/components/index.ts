@@ -5,6 +5,7 @@ import PhyPlane from './PhyPlane';
 import Piece from './Piece';
 import Text from './Text';
 import Timeline from './Timeline';
+import Legend from './Legend';
+import Speech from './Speech';
 
-
-export { CameraControls, Gallery, Line, PhyPlane, Piece, Text, Timeline };
+export { CameraControls, Gallery, Line, PhyPlane, Piece, Text, Timeline, Legend, Speech };

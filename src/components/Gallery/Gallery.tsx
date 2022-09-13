@@ -1,6 +1,13 @@
 import { Physics } from '@react-three/cannon';
 import { Canvas } from '@react-three/fiber';
+import * as THREE from 'three';
 import React, { useState } from 'react';
+import {
+  CameraControls, Legend, Line,
+  Overlay, PhyPlane,
+  Piece,
+  Timeline
+} from '..';
 import { IGallery, IPiece } from '../../types';
 import {
   calculatePieceScale,
@@ -10,15 +17,6 @@ import {
   getRelatedPieces,
   groupByYear
 } from '../../utils';
-import {
-  CameraControls,
-  Line,
-  Overlay,
-  Legend,
-  PhyPlane,
-  Piece,
-  Timeline
-} from '..';
 import './Gallery.scss';
 
 const Gallery: React.FC<IGallery> = (props: IGallery) => {
@@ -90,8 +88,8 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
                     return (
                       <Line
                         color="#fc0"
-                        start={selectedPiecePos}
-                        end={targetPiecePos}
+                        start={selectedPiecePos.clone().add(new THREE.Vector3(0, -.5, .05))}
+                        end={targetPiecePos.clone().add(new THREE.Vector3(0, -.5, .05))}
                       />
                     );
                   }

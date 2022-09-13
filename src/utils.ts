@@ -105,9 +105,7 @@ const calculatePieceScale = (item: IPiece): [x: number, y: number, z: number] =>
         Math.pow(item.width, 2) + Math.pow(item.height, 2)
       );
 
-      const scalingFactor = size / scaledDiameter;
-
-      size = item.height * scalingFactor;
+      size = (size / scaledDiameter) * item.height;
 
       break;
     default:

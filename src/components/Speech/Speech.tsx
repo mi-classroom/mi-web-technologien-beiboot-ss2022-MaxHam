@@ -7,15 +7,14 @@ const Speech: React.FC<ISpeech> = (props: ISpeech) => {
   const { text, volume } = props;
   const [supported, setSupported] = useState(false);
 
-
   useEffect(() => {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       setSupported(true);
     }
   }, []);
 
-  const speak = (args: {text: string, volume: number}) => {
-    const {text = '', volume = 1} = args;
+  const speak = (args: { text: string; volume: number }) => {
+    const { text = '', volume = 1 } = args;
     if (!supported) return;
     const utterance = new window.SpeechSynthesisUtterance();
     utterance.text = text;
@@ -25,7 +24,7 @@ const Speech: React.FC<ISpeech> = (props: ISpeech) => {
 
   const handleClick = () => {
     speak({ text, volume });
-  }
+  };
 
   return (
     <button className="speech-button" onClick={handleClick}>

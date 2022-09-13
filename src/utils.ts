@@ -1,4 +1,3 @@
-import React from 'react';
 import { Vector3 } from 'three';
 import { STEP_SIZE } from './constants';
 import { IPiece } from './types';

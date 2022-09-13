@@ -3,8 +3,11 @@ import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
 import React, { useState } from 'react';
 import {
-  CameraControls, Legend, Line,
-  Overlay, PhyPlane,
+  CameraControls,
+  Legend,
+  Line,
+  Overlay,
+  PhyPlane,
   Piece,
   Timeline
 } from '..';
@@ -88,8 +91,12 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
                     return (
                       <Line
                         color="#fc0"
-                        start={selectedPiecePos.clone().add(new THREE.Vector3(0, -.5, .05))}
-                        end={targetPiecePos.clone().add(new THREE.Vector3(0, -.5, .05))}
+                        start={selectedPiecePos
+                          .clone()
+                          .add(new THREE.Vector3(0, -0.5, 0.05))}
+                        end={targetPiecePos
+                          .clone()
+                          .add(new THREE.Vector3(0, -0.5, 0.05))}
                       />
                     );
                   }

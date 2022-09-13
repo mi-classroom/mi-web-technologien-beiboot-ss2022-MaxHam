@@ -68,14 +68,10 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
             {selectedPiece && showRelations ?(
               getRelatedPieces(selectedPiece.references, pieces).map((targetPiece)=> {
                 const selectedPiecePos = determinePiecePosition(findIndex(selectedPiece.id, pieces), selectedPiece.year)
-                const targetPiecePos = determinePiecePosition(findIndex(targetPiece.id, pieces), targetPiece.year)
-                const lineStart: [x: number, y: number, z: number] = [selectedPiecePos.x ,  -.5, selectedPiecePos.z + 0.01]
-                const lineEnd: [x: number, y: number, z: number] = [targetPiecePos.x,  -.5, targetPiecePos.z + 0.01]
-                
-              
+                const targetPiecePos = determinePiecePosition(findIndex(targetPiece.id, pieces), targetPiece.year)              
 
               return(
-                <Line color='#fc0' start={lineStart[0] > lineEnd[0] ? lineStart : lineEnd } end={lineStart[0] < lineEnd[0] ? lineStart : lineEnd}/>
+                <Line color='#fc0' start={selectedPiecePos} end={targetPiecePos}/>
               )
             })
             ): (null)}

@@ -3,6 +3,7 @@ import React, {useRef} from 'react';
 import { IPieceComponent } from '../../types';
 import { getImage } from '../../utils';
 import Line from '../Line';
+import * as THREE from 'three';
 import './Piece.scss';
 
 const Piece =(props: IPieceComponent) => {
@@ -16,20 +17,20 @@ const Piece =(props: IPieceComponent) => {
     ...otherProps
   } = props;
 
-  const meshRef = useRef()
-  const imgRef = useRef()
+
+  const selectedLineStart = position.clone().add(new THREE.Vector3(0, 0, .05))
+  const selectedLineEnd= position.clone().add(new THREE.Vector3(0, -.5, .05))
 
   return (
     <>      
-      <mesh {...otherProps} ref={meshRef} position={position} onClick={onSelect(pieceId)} name={pieceId} >
+      <mesh {...otherProps}  position={position} onClick={onSelect(pieceId)} name={pieceId} >
         <Image
           url={getImage(img)}
           // @ts-ignore
           scale={imgScale}
-          ref={imgRef}
-        />
+        />sa
       </mesh>
-      {selected && <Line color='#fc0' start={[position.x,  position.y, position.z + 0.01]} end={[position.x, -0.5, position.z + 0.01]} />}
+      {selected && <Line color='#fc0' start={selectedLineStart} end={selectedLineEnd} />}
     </>
 );
 };

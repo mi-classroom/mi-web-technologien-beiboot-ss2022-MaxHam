@@ -37,8 +37,8 @@ interface IPieceComponent  {
 } 
 
 interface ILine {
-  start: [x: number, y: number, z: number];
-  end: [x: number, y: number, z: number];
+  start: Vector3;
+  end: Vector3;
   color?: string;
 }
 

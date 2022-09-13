@@ -38,7 +38,8 @@
     "build": "react-scripts build",
     "heroku-postbuild": "cd express && npm install",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier-format": "prettier --config .prettierrc . --write"
   },
   "eslintConfig": {
     "extends": [

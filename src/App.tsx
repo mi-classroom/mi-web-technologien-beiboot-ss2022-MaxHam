@@ -22,18 +22,18 @@ function App() {
   };
 
   return (
-    <div className='App'>
+    <div className="App">
       {pieces.length < 1 ? (
-        <div className='start-screen'>
-          <div className='upload-zone'>
+        <div className="start-screen">
+          <div className="upload-zone">
             <h3>
               Please upload the JSON file to see the artworks of Lucas Cranach
             </h3>
-            <label className='upload-button'>
+            <label className="upload-button">
               <input
-                type='file'
+                type="file"
                 onChange={onFileChange}
-                accept='application/JSON'
+                accept="application/JSON"
               />
               Select file
             </label>

@@ -11,7 +11,7 @@ const CameraControls: React.FC = () => {
 
   /** enable looking around */
   const handleMouseDown = (e) => {
-    if(e.button === 2) {
+    if (e.button === 2) {
       setActiveLook(true);
     }
   };
@@ -22,7 +22,7 @@ const CameraControls: React.FC = () => {
   };
 
   useEffect(() => {
-    if(ref.current) {
+    if (ref.current) {
       ref.current.lookAt(0, 1, -1000);
     }
 

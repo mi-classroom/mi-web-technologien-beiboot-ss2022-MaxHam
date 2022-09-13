@@ -9,4 +9,15 @@ import Legend from './Legend';
 import Speech from './Speech';
 import Overlay from './Overlay';
 
-export { CameraControls, Gallery, Line, PhyPlane, Piece, Text, Timeline, Legend, Speech, Overlay };
+export {
+  CameraControls,
+  Gallery,
+  Line,
+  PhyPlane,
+  Piece,
+  Text,
+  Timeline,
+  Legend,
+  Speech,
+  Overlay
+};

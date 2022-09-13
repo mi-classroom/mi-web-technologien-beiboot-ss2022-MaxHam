@@ -1,11 +1,10 @@
-@import "./assets/styles/scss/abstracts/variables.scss";
-@import "assets/styles/scss/theme.scss";
+@import './assets/styles/scss/abstracts/variables.scss';
+@import 'assets/styles/scss/theme.scss';
 
 body {
-	@include theme;
-	margin: 0;
-	background-color: $lighter;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  @include theme;
+  margin: 0;
+  background-color: $lighter;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-

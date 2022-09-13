@@ -1,37 +1,43 @@
 @use './abstracts/variables.scss';
 
 @mixin theme {
-    p,span,label {
-       font-family: $font-sans-serif;
-       font-weight: $fw-regular;
-       line-height: $lh-normal;
-       color: $darkest;
-    }
+  p,
+  span,
+  label {
+    font-family: $font-sans-serif;
+    font-weight: $fw-regular;
+    line-height: $lh-normal;
+    color: $darkest;
+  }
 
-    h1,h2,h3,h4,h5 {
-        font-family: $font-sans-serif;
-        font-weight: $fw-bold;
-        line-height: $lh-normal;
-        color: $darkest;
-        margin-top: 0;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: $font-sans-serif;
+    font-weight: $fw-bold;
+    line-height: $lh-normal;
+    color: $darkest;
+    margin-top: 0;
+  }
 
-    a {
-        font-family: $font-sans-serif;
-        font-weight: $fw-regular;
-        line-height: $lh-normal;
-    }
+  a {
+    font-family: $font-sans-serif;
+    font-weight: $fw-regular;
+    line-height: $lh-normal;
+  }
 
-    button {
-        background-color: $accent;
-        border-radius:$radius-m ;
-        border: 0px;
-    }
+  button {
+    background-color: $accent;
+    border-radius: $radius-m;
+    border: 0px;
+  }
 
-    button > label {
-        font-family: $font-sans-serif;
-        font-weight: $fw-bold;
-        line-height: $lh-normal;
-        color: $dark; 
-    }
+  button > label {
+    font-family: $font-sans-serif;
+    font-weight: $fw-bold;
+    line-height: $lh-normal;
+    color: $dark;
+  }
 }

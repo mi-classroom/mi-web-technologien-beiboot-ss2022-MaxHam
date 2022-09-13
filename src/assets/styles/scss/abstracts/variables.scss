@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 // custom variables
 $max-width: 300px;
@@ -79,10 +79,10 @@ $term-width-large: $m * 16;
 /* Schriften
 ---------------------------------------------------------------------------- */
 
-$font-sans-serif: "IBMPlexSans", sans-serif;
-$font-icons: "MaterialIcons";
-$font-code: menlo, consolas, "Courier New", courier, "Liberation Mono",
-	monospace;
+$font-sans-serif: 'IBMPlexSans', sans-serif;
+$font-icons: 'MaterialIcons';
+$font-code: menlo, consolas, 'Courier New', courier, 'Liberation Mono',
+  monospace;
 
 /* Schriftgewichte
 ---------------------------------------------------------------------------- */
@@ -151,28 +151,28 @@ $radius-m: 5px;
 ---------------------------------------------------------------------------- */
 
 :root {
-	--responsive-padding-top: #{$m};
-	--responsive-padding-top-inner: #{$s};
-	--responsive-padding-right-left: #{$m};
-	--responsive-padding-bottom: #{$l};
-	--responsive-padding-bottom-inner: #{$m};
-	--responsive-gap: #{$m};
+  --responsive-padding-top: #{$m};
+  --responsive-padding-top-inner: #{$s};
+  --responsive-padding-right-left: #{$m};
+  --responsive-padding-bottom: #{$l};
+  --responsive-padding-bottom-inner: #{$m};
+  --responsive-gap: #{$m};
 
-	@media only screen and (min-width: $vp-xlarge) {
-		--responsive-padding-top: #{$xxl};
-		--responsive-padding-top-inner: #{$xl};
-		--responsive-padding-right-left: #{$xxl};
-		--responsive-padding-bottom: #{$xxxl};
-		--responsive-padding-bottom-inner: #{$xl};
-		--responsive-gap: #{$xl};
-	}
+  @media only screen and (min-width: $vp-xlarge) {
+    --responsive-padding-top: #{$xxl};
+    --responsive-padding-top-inner: #{$xl};
+    --responsive-padding-right-left: #{$xxl};
+    --responsive-padding-bottom: #{$xxxl};
+    --responsive-padding-bottom-inner: #{$xl};
+    --responsive-gap: #{$xl};
+  }
 
-	@media only screen and (min-width: $vp-xxlarge) {
-		--responsive-padding-top: #{$xxxl};
-		--responsive-padding-top-inner: #{$xxl};
-		--responsive-padding-right-left: #{$xxxl};
-		--responsive-padding-bottom: #{$xxxl};
-		--responsive-padding-bottom-inner: #{$xxl};
-		--responsive-gap: #{$xxl};
-	}
+  @media only screen and (min-width: $vp-xxlarge) {
+    --responsive-padding-top: #{$xxxl};
+    --responsive-padding-top-inner: #{$xxl};
+    --responsive-padding-right-left: #{$xxxl};
+    --responsive-padding-bottom: #{$xxxl};
+    --responsive-padding-bottom-inner: #{$xxl};
+    --responsive-gap: #{$xxl};
+  }
 }

@@ -1,6 +1,6 @@
 import { STEP_SIZE } from '../../constants';
 import { ITimeLine } from '../../types';
-import { Line, Text} from '..';
+import { Line, Text } from '..';
 import * as THREE from 'three';
 
 const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
@@ -13,7 +13,10 @@ const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
 
   return (
     <group position={[0, 0, 0]}>
-      <Line start={ new THREE.Vector3(-0.5, -0.5, 0) } end={new THREE.Vector3(-0.5, -0.5, -length)} />
+      <Line
+        start={new THREE.Vector3(-0.5, -0.5, 0)}
+        end={new THREE.Vector3(-0.5, -0.5, -length)}
+      />
       {array.map((number, index) => (
         <group key={index}>
           <Line
@@ -29,7 +32,7 @@ const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
             y={0}
             z={-(index * STEP_SIZE)}
             content={(startDate + index).toString()}
-            color='black'
+            color="black"
           />
         </group>
       ))}

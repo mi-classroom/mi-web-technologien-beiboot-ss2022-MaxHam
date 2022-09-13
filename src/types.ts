@@ -63,4 +63,11 @@ interface IGallery {
   pieces: IPiece[];
 }
 
-export type { IEdges, IPiece, IPieceComponent, IGallery, ILine, IText, ITimeLine , IOverlay, ISpotlight};
+
+interface ISpeech {
+  text: string,
+  volume: number
+}
+
+
+export type { IEdges, IPiece, IPieceComponent, IGallery, ILine, IText, ITimeLine , IOverlay, ISpotlight,ISpeech};

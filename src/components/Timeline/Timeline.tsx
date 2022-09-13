@@ -1,7 +1,6 @@
 import { STEP_SIZE } from '../../constants';
 import { ITimeLine } from '../../types';
-import Line from '../Line/Line';
-import Text from '../Text/Text';
+import { Line, Text} from '..';
 
 const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
   const { startDate, endDate } = props;
@@ -10,7 +9,7 @@ const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
   const width = 50;
 
   const array = Array.from(Array(length).keys());
-  
+
   return (
     <group position={[0, 0, 0]}>
       <Line start={[-0.5, -0.5, 0]} end={[-0.5, -0.5, -length]} />

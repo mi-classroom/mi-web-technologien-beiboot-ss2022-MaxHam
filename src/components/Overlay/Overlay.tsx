@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IOverlay } from '../../types';
 import { getPieceReference } from '../../utils';
-import Speech from '../Speech';
+import { Speech } from '..';
 import './Overlay.scss';
 
 const Overlay: React.FC<IOverlay> = (props: IOverlay) => {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.scss';
-import Gallery from './components/Gallery';
+import { Gallery } from './components';
 import { IPiece } from './types';
 import { sortPiecesJson } from './utils';
 function App() {

@@ -3,13 +3,15 @@ import { Canvas } from '@react-three/fiber';
 import React, { useState } from 'react';
 import { IGallery, IPiece } from '../../types';
 import { calculatePieceScale, determinePiecePosition, findIndex, getPieceById, getRelatedPieces, groupByYear } from '../../utils';
-import CameraControls from '../CameraControls';
-import Line from '../Line';
-import Overlay from '../Overlay';
-import Legend from '../Legend';
-import PhyPlane from '../PhyPlane/PhyPlane';
-import Piece from '../Piece';
-import Timeline from '../Timeline/Timeline';
+import {
+  CameraControls,
+  Line,
+  Overlay,
+  Legend,
+  PhyPlane,
+  Piece,
+  Timeline
+} from '..'
 import './Gallery.scss';
 
 const Gallery: React.FC<IGallery> = (props: IGallery) => {

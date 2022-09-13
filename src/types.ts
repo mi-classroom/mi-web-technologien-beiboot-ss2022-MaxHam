@@ -27,12 +27,13 @@ interface IPiece {
   references: string[];
 }
 
-interface IPieceComponent extends Mesh {
+interface IPieceComponent  {
   imgScale?: [x: number, y: number, z: number];
   img: string;
   pieceId: string;
   selected: boolean;
   onSelect?: (key: string) => (e) => void;
+  position: Vector3;
 } 
 
 interface ILine {
@@ -64,10 +65,14 @@ interface IGallery {
 }
 
 
+interface IPlane extends PlaneProps {
+	color: string;
+}
+
 interface ISpeech {
   text: string,
   volume: number
 }
 
 
-export type { IEdges, IPiece, IPieceComponent, IGallery, ILine, IText, ITimeLine , IOverlay, ISpotlight,ISpeech};
+export type { IEdges, IPiece, IPieceComponent, IGallery, ILine, IText, ITimeLine , IOverlay, ISpotlight, ISpeech, IPlane};

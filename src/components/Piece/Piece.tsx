@@ -16,8 +16,6 @@ const Piece =(props: IPieceComponent) => {
     ...otherProps
   } = props;
 
-
-
   const meshRef = useRef()
   const imgRef = useRef()
 

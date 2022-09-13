@@ -11,6 +11,7 @@ const Text: React.FC<IText> = (props: IText) => {
   const handleClick = () => {
     window.open(href, '_blank').focus();
   };
+  
   return (
     <mesh position={[x, y, z]} onClick={href && handleClick}>
       <Text3D

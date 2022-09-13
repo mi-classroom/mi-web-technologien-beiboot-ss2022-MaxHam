@@ -6,7 +6,7 @@ extend({ FirstPersonControls });
 
 const CameraControls: React.FC = () => {
   const { camera } = useThree();
-  const ref = useRef();
+  const ref = useRef<FirstPersonControls>();
   const [activeLook, setActiveLook] = useState(false);
 
   /** enable looking around */
@@ -22,8 +22,9 @@ const CameraControls: React.FC = () => {
   };
 
   useEffect(() => {
-    /* @ts-ignore */
-    ref.current.lookAt(0, 1, -1000);
+    if(ref.current) {
+      ref.current.lookAt(0, 1, -1000);
+    }
 
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
@@ -35,8 +36,9 @@ const CameraControls: React.FC = () => {
   }, []);
 
   useFrame((state, delta) => {
-    // @ts-ignore
-    ref.current.update(delta);
+    if (ref.current) {
+      ref.current.update(delta);
+    }
   });
   return (
     <>

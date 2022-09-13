@@ -46,7 +46,6 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
             />
             {pieces && groupByYear(pieces).map((group: IPiece[]) => {
               return group.map((item: IPiece, index: number) => (
-                // @ts-ignore
                 <Piece
                   key={item.id}
                   pieceId={item.id}
@@ -77,7 +76,7 @@ const Gallery: React.FC<IGallery> = (props: IGallery) => {
                 <Line color='#fc0' start={lineStart[0] > lineEnd[0] ? lineStart : lineEnd } end={lineStart[0] < lineEnd[0] ? lineStart : lineEnd}/>
               )
             })
-            ): (<></>)}
+            ): (null)}
           </>
         </Physics>
         <ambientLight intensity={0.3} />

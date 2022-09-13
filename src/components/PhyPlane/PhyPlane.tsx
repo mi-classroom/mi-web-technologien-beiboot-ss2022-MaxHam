@@ -1,15 +1,8 @@
-// It allows you to input a color as an argument
-// The material used will have been built by a mesh material
-// Remember, you can still add other attributes in the object created
-// We won't add it's mass since itwill begin to fall
-
-import { PlaneProps, usePlane } from "@react-three/cannon";
+import { usePlane } from "@react-three/cannon";
 import { Plane } from "@react-three/drei";
+import { IPlane } from '../../types';
 
-interface IProps extends PlaneProps {
-	color: string;
-}
-const PhyPlane: React.FC<IProps> = (props) => {
+const PhyPlane: React.FC<IPlane> = (props: IPlane) => {
 	const { color } = props;
 	const [ref] = usePlane(() => ({ ...props }));
 

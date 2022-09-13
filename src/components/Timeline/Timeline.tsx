@@ -10,6 +10,7 @@ const Timeline: React.FC<ITimeLine> = (props: ITimeLine) => {
   const width = 50;
 
   const array = Array.from(Array(length).keys());
+  
   return (
     <group position={[0, 0, 0]}>
       <Line start={[-0.5, -0.5, 0]} end={[-0.5, -0.5, -length]} />

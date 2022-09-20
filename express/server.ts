@@ -1,23 +1,25 @@
-const express = require("express");
-const basicAuth = require("express-basic-auth");
-const path = require("path");
+require('dotenv').config()
+const express = require('express');
+const basicAuth = require('express-basic-auth');
+const path = require('path');
 const app = express();
+let port = process.env.PORT || 3000
 
 app.use(
-	basicAuth({
-		challenge: true,
-		users: { cranach: "meisterwerke" },
-	})
+  basicAuth({
+    challenge: true,
+    users: { cranach: 'meisterwerke' }
+  })
 );
-app.use(express.static(path.join(__dirname, "..", "build")));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, '..', 'build')));
+app.use(express.static('public'));
 
 // add middlewares
 
 app.use((req, res, next) => {
-	res.sendFile(path.join(__dirname, "..", "build", "index.html"));
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
 
-app.listen(3000, () => {
-	console.log("server started on port 3000");
+app.listen(port, () => {
+  console.log(`server started on port ${port}`);
 });

@@ -1,10 +1,10 @@
-@import "../../assets/styles/scss/abstracts/variables.scss";
+@import '../../assets/styles/scss/abstracts/variables.scss';
 
 .piece {
-	height: auto;
-	max-width: $max-width;
-	img {
-		height: auto;
-		max-width: $max-width;
-	}
+  height: auto;
+  max-width: $max-width;
+  img {
+    height: auto;
+    max-width: $max-width;
+  }
 }

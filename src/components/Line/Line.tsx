@@ -1,81 +1,30 @@
-import { Box } from '@react-three/drei';
+import { useRef } from 'react';
+import * as THREE from 'three';
 import { ILine } from '../../types';
 
 const CustomLine: React.FC<ILine> = (props: ILine) => {
   const { start, end, color: propColor } = props;
-  const linewidth = 0.0075;
   const color: string = propColor || '#000000';
+  const ref = useRef();
 
-  function calcLength(start: number, end: number) {
-    return end - start;
-  }
+  const points: THREE.Vector3[] = [];
+  points.push(start);
+  points.push(end);
 
-  const calcDimensions = (): {
-    size: [x: number, y: number, z: number];
-    position: [x: number, y: number, z: number];
-  } => {
-    if (start[0] > end[0]) {
-      const length = calcLength(start[0], end[0]);
-      return {
-        size: [length, linewidth, linewidth],
-        position: [start[0] + length / 2, start[1], start[2]],
-      };
-    }
-
-    if (start[0] < end[0]) {
-      const length = calcLength(start[0], end[0]);
-
-      return {
-        size: [length, linewidth, linewidth],
-        position: [start[0] - length / 2, start[1], start[2]],
-      };
-    }
-
-    if (start[1] > end[1]) {
-      const length = calcLength(start[1], end[1]);
-      return {
-        size: [linewidth, length, linewidth],
-        position: [start[0], start[1] + length / 2, start[2]],
-      };
-    }
-
-    if (start[1] < end[1]) {
-      const length = calcLength(start[1], end[1]);
-      return {
-        size: [linewidth, length, linewidth],
-        position: [start[0], start[1] - length / 2, start[2]],
-      };
-    }
-
-    if (start[2] > end[2]) {
-      const length = calcLength(start[2], end[2]);
-      return {
-        size: [linewidth, linewidth, length],
-        position: [start[0], start[1], start[2] + length / 2],
-      };
-    }
-
-    if (start[2] < end[2]) {
-      const length = calcLength(start[2], end[2]);
-      return {
-        size: [linewidth, linewidth, length],
-        position: [start[0], start[1], start[2] - length / 2],
-      };
-    }
-
-    return {
-      size: [linewidth, linewidth, linewidth],
-      position: [start[0], start[1], start[2]],
-    };
-  };
-
-  const dimensions = calcDimensions();
-  const { size, position } = dimensions;
+  const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
 
   return (
-    <Box position={position} args={size}>
-      <meshBasicMaterial color={color} />
-    </Box>
+    <>
+      {/* @ts-ignore */}
+      <line ref={ref} geometry={lineGeometry}>
+        <lineBasicMaterial
+          attach="material"
+          color={color}
+          linecap={'round'}
+          linejoin={'round'}
+        />
+      </line>
+    </>
   );
 };
 

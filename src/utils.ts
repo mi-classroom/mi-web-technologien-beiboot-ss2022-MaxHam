@@ -1,4 +1,3 @@
-import React from 'react';
 import { Vector3 } from 'three';
 import { STEP_SIZE } from './constants';
 import { IPiece } from './types';
@@ -44,7 +43,7 @@ const parseToPieces = (items: any[]): IPiece[] =>
       year: item.sortingInfo.year,
       artist: item.involvedPersons[0].name,
       dimensions: item.dimensions,
-      references: item.references.map((ref)=> ref.inventoryNumber),
+      references: item.references.map((ref) => ref.inventoryNumber)
     };
   });
 
@@ -72,7 +71,9 @@ const groupByYear = (items: IPiece[]) => {
   return groups;
 };
 
-const calculatePieceScale = (item: IPiece): [x: number, y: number, z: number] => {
+const calculatePieceScale = (
+  item: IPiece
+): [x: number, y: number, z: number] => {
   const split = item.dimensions.replace(/[\])}[{(]/g, ' ').split(' ');
   const scalingFactor = 0.000008;
   const splitWithoutCM = split.filter(
@@ -105,60 +106,62 @@ const calculatePieceScale = (item: IPiece): [x: number, y: number, z: number] =>
         Math.pow(item.width, 2) + Math.pow(item.height, 2)
       );
 
-      const scalingFactor = size / scaledDiameter;
-
-      size = item.height * scalingFactor;
+      size = (size / scaledDiameter) * item.height;
 
       break;
     default:
       break;
   }
 
-  return  [(item.width) * (size* scalingFactor), (item.height) * (size * scalingFactor), 1]
+  return [
+    item.width * (size * scalingFactor),
+    item.height * (size * scalingFactor),
+    1
+  ];
 };
-
 
 const getPieceReference = (id: string) => {
   return `https://lucascranach.org/de/${id}/`;
-}
+};
 
 const getPieceById = (id: string, pieces: IPiece[]) => {
-  return pieces.find((value)=> value.id === id)
-}
-
+  return pieces.find((value) => value.id === id);
+};
 
 const determinePiecePosition = (indentation: number, year: number): Vector3 => {
- const z = -(year - 1501) * STEP_SIZE;
+  const z = -(year - 1501) * STEP_SIZE;
 
- return new Vector3(indentation, 0, z)
-}
+  return new Vector3(indentation, 0, z);
+};
 
-const determinePieceScale = (width: number, height: number, scale: number) => [(width) * scale, (height) * scale, 1]
+const determinePieceScale = (width: number, height: number, scale: number) => [
+  width * scale,
+  height * scale,
+  1
+];
 
 const getRelatedPieces = (references: string[], pieces: IPiece[]) => {
-  return pieces.filter((piece) => references.includes(piece.id))
-}
+  return pieces.filter((piece) => references.includes(piece.id));
+};
 
 const findIndex = (searchValue: any, array: any[]) => {
+  const groupedArray = groupByYear(array);
 
-  const groupedArray =  groupByYear(array)
-
-  let foundIndex
-  groupedArray.every( (group) => {
-     const index = group.findIndex((element) => element.id === searchValue )
-     console.log(index)
-     if(index !== -1) {
+  let foundIndex;
+  groupedArray.every((group) => {
+    const index = group.findIndex((element) => element.id === searchValue);
+    console.log(index);
+    if (index !== -1) {
       foundIndex = index;
       // every() stops as soonh as it returns a falsy value
       return false;
-     }
-     return true;
-    });
+    }
+    return true;
+  });
 
-  console.log(foundIndex)
+  console.log(foundIndex);
   return foundIndex;
-}
-
+};
 
 export {
   findIndex,
@@ -171,5 +174,5 @@ export {
   getImage,
   groupByYear,
   calculatePieceScale,
-  sortPiecesJson,
+  sortPiecesJson
 };

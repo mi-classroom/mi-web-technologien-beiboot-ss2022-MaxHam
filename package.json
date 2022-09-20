@@ -2,6 +2,10 @@
   "name": "mi-web-technologien-beiboot-ss2022-maxham",
   "homepage": "./",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=14.18.0",
+    "npm": ">=8.3.1"
+  },
   "proxy": "http://localhost:3000",
   "private": true,
   "browser": {
@@ -18,15 +22,14 @@
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.3",
     "@types/three": "^0.141.0",
-    "camera-controls": "^1.34.6",
     "express-basic-auth": "^1.2.1",
     "fs": "^0.0.1-security",
-    "react": "^18.1.0",
+    "prettier": "^2.7.1",
+    "react": ">=18.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
-    "react-speech-kit": "^3.0.1",
+    "react-three-fiber": "^6.0.13",
     "sass": "^1.51.0",
-    "svgo": "^2.8.0",
     "three": "^0.141.0",
     "typescript": "^4.6.4",
     "web-vitals": "^2.1.4"
@@ -37,7 +40,9 @@
     "build": "react-scripts build",
     "heroku-postbuild": "cd express && npm install",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier-format": "prettier --config .prettierrc . --write",
+    "deploy": "git push heroku main"
   },
   "eslintConfig": {
     "extends": [

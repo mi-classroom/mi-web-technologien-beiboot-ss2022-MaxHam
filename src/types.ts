@@ -4,9 +4,8 @@ import { BufferGeometry, Material, Mesh, Vector3 } from 'three';
 interface IOverlay {
   selectedPiece: IPiece;
   showRelations: boolean;
-  onTriggerRelations: (checked: boolean) => void
+  onTriggerRelations: (checked: boolean) => void;
 }
-
 
 interface ISpotlight {
   selectedPieceRef: any;
@@ -27,22 +26,23 @@ interface IPiece {
   references: string[];
 }
 
-interface IPieceComponent extends Mesh {
+interface IPieceComponent {
   imgScale?: [x: number, y: number, z: number];
   img: string;
   pieceId: string;
   selected: boolean;
   onSelect?: (key: string) => (e) => void;
-} 
+  position: Vector3;
+}
 
 interface ILine {
-  start: [x: number, y: number, z: number];
-  end: [x: number, y: number, z: number];
+  start: Vector3;
+  end: Vector3;
   color?: string;
 }
 
 interface IEdges {
-  geometry: any; 
+  geometry: any;
 }
 
 interface ITimeLine {
@@ -63,11 +63,25 @@ interface IGallery {
   pieces: IPiece[];
 }
 
-
-interface ISpeech {
-  text: string,
-  volume: number
+interface IPlane extends PlaneProps {
+  color: string;
 }
 
+interface ISpeech {
+  text: string;
+  volume: number;
+}
 
-export type { IEdges, IPiece, IPieceComponent, IGallery, ILine, IText, ITimeLine , IOverlay, ISpotlight,ISpeech};
+export type {
+  IEdges,
+  IPiece,
+  IPieceComponent,
+  IGallery,
+  ILine,
+  IText,
+  ITimeLine,
+  IOverlay,
+  ISpotlight,
+  ISpeech,
+  IPlane
+};

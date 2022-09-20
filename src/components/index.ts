@@ -7,5 +7,17 @@ import Text from './Text';
 import Timeline from './Timeline';
 import Legend from './Legend';
 import Speech from './Speech';
+import Overlay from './Overlay';
 
-export { CameraControls, Gallery, Line, PhyPlane, Piece, Text, Timeline, Legend, Speech };
+export {
+  CameraControls,
+  Gallery,
+  Line,
+  PhyPlane,
+  Piece,
+  Text,
+  Timeline,
+  Legend,
+  Speech,
+  Overlay
+};
